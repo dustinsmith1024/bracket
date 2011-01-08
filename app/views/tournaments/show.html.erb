@@ -1,0 +1,133 @@
+<div class="dark">
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @tournament.name %>
+</p>
+
+<p>
+  <b>Title:</b>
+  <%= @tournament.title %>
+</p>
+
+<p>
+  <b>Content:</b>
+  <%= @tournament.content %>
+</p>
+<% winner = [] %>
+<% winner[0] = Team.winner([1,16]) %>
+<% winner[1] = Team.winner([2,15]) %>
+<% winner[2] = Team.winner([3,14]) %>
+<% winner[3] = Team.winner([4,13]) %>
+<% winner[4] = Team.winner([5,12]) %>
+<% winner[5] = Team.winner([6,11]) %>
+<% winner[6] = Team.winner([7,10]) %>
+<% winner[7] = Team.winner([8,9]) %>
+<% winner[8] = Team.winner([winner[0],winner[7]]) %>
+<% winner[9] = Team.winner([winner[1],winner[6]]) %>
+<% winner[10] = Team.winner([winner[2],winner[5]]) %>
+<% winner[11] = Team.winner([winner[3],winner[4]]) %>
+<% winner[12] = Team.winner([winner[8],winner[9]]) %>
+<% winner[13] = Team.winner([winner[10],winner[11]]) %>
+<% winner[14] = Team.winner([winner[12],winner[13]]) %>
+
+
+<table>
+<tr>
+  <td class="bb"><%= Team.find_by_seed(1).name %></td><td></td><td></td><td></td><td></td>
+</tr>
+<tr>
+  <td class="br"></td><td class="bb"><%= Team.find(winner[0]).name %></td><td></td><td></td><td></td>
+</tr>
+<tr>
+  <td class="bb br"><%= Team.find_by_seed(16).name %></td><td class="br"></td><td></td><td></td><td></td>
+</tr>
+<tr>
+  <td></td><td class="br"></td><td class="bb"><%= Team.find(winner[8]).name %></td><td></td><td></td>
+</tr>
+<tr>
+  <td class="bb"><%= Team.find_by_seed(8).name %></td><td class="br"></td><td class="br"></td><td></td><td></td>
+</tr>
+<tr>
+  <td class="br"></td><td class="bb br"><%= Team.find(winner[7]).name %></td><td class="br"></td><td></td><td></td>
+</tr>
+<tr>
+  <td class="bb br"><%= Team.find_by_seed(9).name %></td><td></td><td class="br"></td><td></td><td></td>
+</tr>
+<tr>
+  <td class=""></td><td></td><td class="br"></td><td class="bb"><%= Team.find(winner[10]).name %></td><td></td>
+</tr>
+<tr>
+  <td class="bb"><%= Team.find_by_seed(4).name %></td><td></td><td class="br"></td><td class="br"></td><td></td>
+</tr>
+<tr>
+  <td class="br"></td><td class="bb"><%= Team.find(winner[3]).name %></td><td class="br"></td><td class="br"></td><td></td>
+</tr>
+<tr>
+  <td class="bb br"><%= Team.find_by_seed(13).name %></td><td class="br"></td><td class="br"></td><td class="br"></td><td></td>
+</tr>
+<tr>
+  <td class=""></td><td class="br"></td><td class="bb br"><%= Team.find(winner[10]).name %></td><td class="br"></td><td></td>
+</tr>
+<tr>
+  <td class="bb"><%= Team.find_by_seed(11).name %></td><td class="br"></td><td></td><td class="br"></td><td></td>
+</tr>
+<tr>
+  <td class="br"></td><td class="bb br"><%= Team.find(winner[5]).name %></td><td></td><td class="br"></td><td></td>
+</tr>
+<tr>
+  <td class="bb br"><%= Team.find_by_seed(6).name %></td><td></td><td></td><td class="br"></td><td></td>
+</tr>
+<tr>
+  <td class=""></td><td></td><td></td><td class="br"></td><td class="bb"><%= Team.find(winner[14]).name %></td>
+</tr>
+<tr>
+  <td class="bb"><%= Team.find_by_seed(10).name %></td><td></td><td></td><td class="br"></td><td></td>
+</tr>
+<tr>
+  <td class="br"></td><td class="bb"><%=  Team.find(winner[6]).name %></td><td></td><td class="br"></td><td></td>
+</tr>
+<tr>
+  <td class="bb br"><%= Team.find_by_seed(7).name %></td><td class="br"></td><td></td><td class="br"></td><td></td>
+</tr>
+<tr>
+  <td class=""></td><td class="br"></td><td class="bb"><%= Team.find(winner[11]).name %></td><td class="br"></td><td></td>
+</tr>
+<tr>
+  <td class="bb"><%= Team.find_by_seed(5).name %></td><td class="br"></td><td class="br"></td><td class="br"></td><td></td>
+</tr>
+<tr>
+  <td class="br"></td><td class="bb br"><%=  Team.find(winner[4]).name %></td><td class="br"></td><td class="br"></td><td></td>
+</tr>
+<tr>
+  <td class="bb br"><%= Team.find_by_seed(12).name %></td><td></td><td class="br"></td><td class="br"></td><td></td>
+</tr>
+<tr>
+  <td class=""></td><td></td><td class="br"></td><td class="bb br"><%= Team.find(winner[12]).name %></td><td></td>
+</tr>
+<tr>
+  <td class="bb"><%= Team.find_by_seed(14).name %></td><td></td><td class="br"></td><td></td><td></td>
+</tr>
+<tr>
+  <td class="br"></td><td class="bb"><%= Team.find(winner[2]).name %></td><td class="br"></td><td></td><td></td>
+</tr>
+<tr>
+  <td class="bb br"><%= Team.find_by_seed(3).name %></td><td class="br"></td><td class="br"></td><td></td><td></td>
+</tr>
+<tr>
+  <td></td><td class="br"></td><td class="bb br"><%=  Team.find(winner[9]).name %></td><td></td><td></td>
+</tr>
+<tr>
+  <td class="bb"><%= Team.find_by_seed(15).name %></td><td class="br"></td><td></td><td></td><td></td>
+</tr>
+<tr>
+  <td class="br"></td><td class="bb br"><%= Team.find(winner[1]).name %></td><td></td><td></td><td></td>
+</tr>
+<tr>
+  <td class="bb br"><%= Team.find_by_seed(2).name %></td><td></td><td></td><td></td><td></td>
+</tr>
+</table>
+<%= link_to 'Edit', edit_tournament_path(@tournament) %> |
+<%= link_to 'Back', tournaments_path %>
+</div>

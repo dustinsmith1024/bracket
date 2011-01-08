@@ -1,0 +1,27 @@
+
+.dark {
+  background-color: gray;
+}
+
+table {
+ border: 1px dotted black;
+}
+
+table td.bt {
+ border-top: 1px solid black;
+}
+
+table td {
+  border: none;
+  padding: 2px;
+}
+table td.bb {
+ border-bottom: 1px solid black;
+}
+table td.br {
+ border-right: 1px solid black;
+}
+table td.bl {
+ border-left: 1px solid black;
+}
+
