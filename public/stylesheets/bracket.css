@@ -4,7 +4,8 @@
 }
 
 table {
- border: 1px dotted black;
+ border-collapse: collapse;
+ padding: 10px;
 }
 
 table td.bt {
