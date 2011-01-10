@@ -10,8 +10,8 @@ def self.winner(teams, name=false)
 #    if teams.include?(1)
 #      return 1
 #    end
-    up = 0;
-    over = 8;
+    up = 8;
+    over = 0;
     teams = teams.sort
 
 #    if teams[0] == 1
@@ -24,16 +24,13 @@ def self.winner(teams, name=false)
 #    IF 1-4 ODDS PASS A 4 TO .ods
 #    THE TEAM THAT SHOULD WIN SHOULD BE FIRST AFTER ?
     if teams[0] == 1
-logger.info("nextone")
       t = case teams[1]
-# MOVE THE 0:1 to the ods functoin, then switch it there based on the number - or not
         when 1..2 then self.ods(1) ? 1 : 0
         when 3..4 then self.ods(2 - up) ? 1 : 0
         when 5..9 then self.ods(5 - up) ? 1 : 0
         when 10..12 then self.ods(8 - up) ? 1 : 0
         when 13..16 then self.ods(90 - up) ? 1 : 0
       end
-logger.info("Team " + t.to_s)
     end
     if teams[0] == 2
       t = case teams[1]
@@ -120,20 +117,13 @@ end
 ## RETURNS FALSE IF LESS THAN 1
 # IF - then we need to switch the odds somewhow...
     if chance > 0
-
       r = rand(chance)
-logger.info(r)
 # pp (r)
       (r<1)
     else
       r = rand(chance)
-logger.info(r.to_s + " upset possible" )
 # pp (r)
-      if r<1
-        false
-      else
-        true
-      end
+      (1>r)
     end
   end
 
