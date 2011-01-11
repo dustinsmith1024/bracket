@@ -10,6 +10,15 @@
   <%= @team.mascot %>
 </p>
 
+Current Tags:<br/>
+<% @team.tags.each do |tag| %>
+  <%= tag.name %><br/>
+<% end %>
+
+Possible Tags:<br/>
+<% @tags.each do |tag| %>
+  <%= link_to tag.name, add_tag_path(@team,tag), :method => :post %><br/>
+<% end %>
 
 <%= link_to 'Edit', edit_team_path(@team) %> |
 <%= link_to 'Back', teams_path %>

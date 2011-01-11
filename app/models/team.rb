@@ -1,5 +1,6 @@
 class Team < ActiveRecord::Base
 
+has_and_belongs_to_many :tags
 
 def self.random
   self.find_by_id(rand(Team.count) + 1)
@@ -7,86 +8,89 @@ end
 
 def self.winner(teams, name=false)
   if name==false
-#    if teams.include?(1)
-#      return 1
-#    end
     up = 0;
-    over = 8;
+    over = 0;
     teams = teams.sort
-
+## FILL IN FROM USER -> MY TEAM
+    team = Team.find_by_name("Iowa")
+    team_plus = 10
+    if Team.find(teams[0]) == team
+      over += 5
+      logger.info("iowwwaaa1" + over.to_s)
+    elsif Team.find(teams[1]) == team
+      up += 10
+      logger.info("iowwwaaaaa2" + up.to_s)
+    end
 #    if teams[0] == 1
 #     ## ALL ODDS FOR 1 vs matchups
 #      if teams[1] == 2
 #        teams.sample
 #      end
 #    end
-#  SWITCH CASES TO FIND SECOND TEAM THEN PASS ODDS
+#    SWITCH CASES TO FIND SECOND TEAM THEN PASS ODDS
 #    IF 1-4 ODDS PASS A 4 TO .ods
 #    THE TEAM THAT SHOULD WIN SHOULD BE FIRST AFTER ?
     if teams[0] == 1
-logger.info("nextone")
       t = case teams[1]
-# MOVE THE 0:1 to the ods functoin, then switch it there based on the number - or not
-        when 1..2 then self.ods(1) ? 1 : 0
-        when 3..4 then self.ods(2 - up) ? 1 : 0
-        when 5..9 then self.ods(5 - up) ? 1 : 0
-        when 10..12 then self.ods(8 - up) ? 1 : 0
-        when 13..16 then self.ods(90 - up) ? 1 : 0
+        when 1..2 then self.ods(1 + over - up) ? 1 : 0
+        when 3..4 then self.ods(2 + over - up) ? 1 : 0
+        when 5..9 then self.ods(5 + over - up) ? 1 : 0
+        when 10..12 then self.ods(8 + over - up) ? 1 : 0
+        when 13..16 then self.ods(90 + over - up) ? 1 : 0
       end
-logger.info("Team " + t.to_s)
     end
     if teams[0] == 2
       t = case teams[1]
-        when 1..3 then self.ods(1) ? 1 : 0
-        when 4..6 then self.ods(2) ? 1 : 0
-        when 7..9 then self.ods(4) ? 1 : 0
-        when 10..12 then self.ods(8) ? 1 : 0
-        when 13..16 then self.ods(15) ? 1 : 0
+        when 1..3 then self.ods(1 + over - up) ? 1 : 0
+        when 4..6 then self.ods(2 + over - up) ? 1 : 0
+        when 7..9 then self.ods(4 + over - up) ? 1 : 0
+        when 10..12 then self.ods(8 + over - up) ? 1 : 0
+        when 13..16 then self.ods(15 + over - up) ? 1 : 0
       end
     end
     if teams[0] == 3
       t = case teams[1]
-        when 1..2 then self.ods(4) ? 0 : 1
-        when 3..4 then self.ods(1) ? 1 : 0
-        when 5..7 then self.ods(3) ? 1 : 0
-        when 8..10 then self.ods(5) ? 1 : 0
-        when 11..16 then self.ods(10) ? 1 : 0
+        when 1..2 then self.ods(4 + over - up) ? 0 : 1
+        when 3..4 then self.ods(1 + over - up) ? 1 : 0
+        when 5..7 then self.ods(3 + over - up) ? 1 : 0
+        when 8..10 then self.ods(5 + over - up) ? 1 : 0
+        when 11..16 then self.ods(10 + over - up) ? 1 : 0
       end
     end
     if teams[0] == 4
       t = case teams[1]
-        when 1..3 then self.ods(3) ? 0 : 1
-        when 4..6 then self.ods(1) ? 1 : 0
-        when 7..9 then self.ods(3) ? 1 : 0
-        when 10..12 then self.ods(6) ? 1 : 0
-        when 13..16 then self.ods(9) ? 1 : 0
+        when 1..3 then self.ods(3 + over - up) ? 0 : 1
+        when 4..6 then self.ods(1 + over - up) ? 1 : 0
+        when 7..9 then self.ods(3 + over - up) ? 1 : 0
+        when 10..12 then self.ods(6 + over - up) ? 1 : 0
+        when 13..16 then self.ods(9 + over - up) ? 1 : 0
       end
     end
     if teams[0] == 5
       t = case teams[1]
-        when 1..2 then self.ods(4) ? 0 : 1
-        when 3..4 then self.ods(2) ? 0 : 1
-        when 5..7 then self.ods(1) ? 1 : 1
-        when 8..10 then self.ods(6) ? 1 : 0
-        when 11..16 then self.ods(9) ? 1 : 0
+        when 1..2 then self.ods(4 + over - up) ? 0 : 1
+        when 3..4 then self.ods(2 + over - up) ? 0 : 1
+        when 5..7 then self.ods(1 + over - up) ? 1 : 1
+        when 8..10 then self.ods(6 + over - up) ? 1 : 0
+        when 11..16 then self.ods(9 + over - up) ? 1 : 0
       end
     end
     if teams[0] == 6
       t = case teams[1]
-        when 1..3 then self.ods(5) ? 0 : 1
-        when 4..6 then self.ods(3) ? 0 : 1
-        when 7..9 then self.ods(1) ? 1 : 0
-        when 10..12 then self.ods(3) ? 1 : 0
-        when 13..16 then self.ods(5) ? 1 : 0
+        when 1..3 then self.ods(5 + over - up) ? 0 : 1
+        when 4..6 then self.ods(3 + over - up) ? 0 : 1
+        when 7..9 then self.ods(1 + over - up) ? 1 : 0
+        when 10..12 then self.ods(3 + over - up) ? 1 : 0
+        when 13..16 then self.ods(5 + over - up) ? 1 : 0
       end
     end
     if teams[0] == 7
       t = case teams[1]
-        when 1..3 then self.ods(5) ? 0 : 1
-        when 4..6 then self.ods(3) ? 0 : 1
-        when 7..9 then self.ods(1) ? 1 : 0
-        when 10..12 then self.ods(3) ? 1 : 0
-        when 13..16 then self.ods(5) ? 1 : 0
+        when 1..3 then self.ods(5 + over - up) ? 0 : 1
+        when 4..6 then self.ods(3 + over - up) ? 0 : 1
+        when 7..9 then self.ods(1 + over - up) ? 1 : 0
+        when 10..12 then self.ods(3 + over - up) ? 1 : 0
+        when 13..16 then self.ods(5 + over - up) ? 1 : 0
       end
     end
     if teams[0] >= 8
@@ -94,9 +98,9 @@ logger.info("Team " + t.to_s)
       t = case teams[1]
 #        when 1..3 then self.ods(5) ? 0 : 1
 #        when 4..7 then self.ods(3) ? 0 : 1
-        when 8..9 then self.ods(1) ? 1 : 0
-        when 10..12 then self.ods(3) ? 1 : 0
-        when 13..16 then self.ods(5) ? 1 : 0
+        when 8..9 then self.ods(1 + over - up) ? 1 : 0
+        when 10..12 then self.ods(3 + over - up) ? 1 : 0
+        when 13..16 then self.ods(5 + over - up) ? 1 : 0
 #      if teams[1] == 10
 #        t = self.ods(3) ? 1 : 0
 #      end
@@ -104,8 +108,6 @@ logger.info("Team " + t.to_s)
     end
     logger.info(t)
     return teams[t]
-
-#    teams.sample
 
   else
     self.find(teams.sample).name

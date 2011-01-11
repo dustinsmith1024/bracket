@@ -10,11 +10,21 @@ class TeamsController < ApplicationController
     end
   end
 
+  def add_tag
+    @team = Team.find(params[:id])
+    @tag = Tag.find(params[:tag_id])
+
+    @team.tags << @tag
+    respond_to do |format|
+        format.html { redirect_to(team_url(@team), :notice => 'Tag was successfully created.') }
+    end
+  end
+
   # GET /teams/1
   # GET /teams/1.xml
   def show
     @team = Team.find(params[:id])
-
+    @tags = Tag.all
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @team }

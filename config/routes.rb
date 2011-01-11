@@ -1,8 +1,10 @@
 Bracket::Application.routes.draw do
+  resources :tags
+
   resources :teams
 
   resources :tournaments
-
+  match 'teams/:id/add/:tag_id' => 'teams#add_tag', :as => :add_tag, :via => :post
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
