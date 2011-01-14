@@ -1,10 +1,16 @@
 Bracket::Application.routes.draw do
+  get "pages/home"
+  get "pages/info"
+  get "pages/contact"
+
   resources :tags
-
   resources :teams
-
   resources :tournaments
+
   match 'teams/:id/add/:tag_id' => 'teams#add_tag', :as => :add_tag, :via => :post
+
+  root :to => "pages#home"
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

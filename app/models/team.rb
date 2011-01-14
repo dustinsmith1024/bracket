@@ -12,12 +12,40 @@ def self.winner(teams, name=false)
     over = 0;
     teams = teams.sort
 ## FILL IN FROM USER -> MY TEAM
-    team = Team.find_by_name("Iowa")
-    team_plus = 10
-    if Team.find(teams[0]) == team
+    user_team = Team.find_by_name("Iowa")
+## FILL IN FROM USER -> TAGS EVENTUALLY, WHICH ARE FED FROM QUESTIONS!
+    user_tags = %w{Blue Yellow Bird}
+    user_tags << "Bird - Real"  ## PUSH ON ONE WITH SPACES...
+    team_tags = user_team.tags.collect {|t| t.name}
+    logger.info(user_tags)
+    logger.info(team_tags)
+    tmp_tags = []
+    teams.each_with_index do |t,index|
+## PUSH TAG NAMES ONTO AN ARRAY
+      tmp_tags[index] ||= Team.find_by_seed(t).tags.collect{|t|t.name}
+      if index == 0
+## IF THE FIRST TEAM THEN INCREASE THE OVER VAR TO HELP THE BEST SEED WIN
+        user_tags.each do |tag|
+## LOOP THROUGH ALL TAGS TO SEE IF THEY MATCH
+          if tmp_tags[index].include?(tag)
+            over += 2
+          end
+        end
+      else
+## IF THE SECOND TEAM THEN INCREASE THE UP VAR TO MAKE UNDERDOGS WIN
+        user_tags.each do |tag|
+          if tmp_tags[index].include?(tag)
+            up += 2
+          end
+        end
+      end
+    end
+
+    #team_plus = 10
+    if Team.find(teams[0]) == user_team
       over += 5
       logger.info("iowwwaaa1" + over.to_s)
-    elsif Team.find(teams[1]) == team
+    elsif Team.find(teams[1]) == user_team
       up += 10
       logger.info("iowwwaaaaa2" + up.to_s)
     end
@@ -30,6 +58,7 @@ def self.winner(teams, name=false)
 #    SWITCH CASES TO FIND SECOND TEAM THEN PASS ODDS
 #    IF 1-4 ODDS PASS A 4 TO .ods
 #    THE TEAM THAT SHOULD WIN SHOULD BE FIRST AFTER ?
+logger.info("OVER: " + over.to_s + " UP: " + up.to_s)
     if teams[0] == 1
       t = case teams[1]
         when 1..2 then self.ods(1 + over - up) ? 1 : 0

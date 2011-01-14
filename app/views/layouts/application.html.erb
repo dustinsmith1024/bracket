@@ -7,7 +7,22 @@
   <%= csrf_meta_tag %>
 </head>
 <body>
-
+<ul>
+<li>Links: </li>
+<li><%= link_to "Home", pages_home_path %></li>
+<li>>></li>
+<li><%= link_to "Contact", pages_contact_path %></li>
+<li>>></li>
+<li><%= link_to "About", pages_info_path %></li>
+<li>>></li>
+<li><%= link_to "Bracket", tournaments_path %></li>
+<li>>></li>
+<li><%= link_to "Tags", tags_path %></li>
+<li>>></li>
+<li><%= link_to "Teams", teams_path %></li>
+<li> </li>
+</ul>
+<br />
 <%= yield %>
 
 </body>
