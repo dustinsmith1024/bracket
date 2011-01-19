@@ -1,4 +1,6 @@
 Bracket::Application.routes.draw do
+  resources :users
+
   get "pages/home"
   get "pages/info"
   get "pages/contact"

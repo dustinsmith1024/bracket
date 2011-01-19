@@ -7,6 +7,6 @@ class CreateTagAndTeamJoinTable < ActiveRecord::Migration
   end
 
   def self.down
-    drop_table :teams_tags
+    drop_table :tags_teams
   end
 end

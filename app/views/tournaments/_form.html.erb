@@ -15,6 +15,9 @@
     <%= f.label :name %><br />
     <%= f.text_field :name %>
   </div>
+
+  <%= collection_select(:tournament, :user_id, User.all, :id, :name, :prompt => true, :selected => @tournament.user) %>
+
   <div class="field">
     <%= f.label :title %><br />
     <%= f.text_field :title %>

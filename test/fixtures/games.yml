@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  tournament: 
+  team: 
+  team_two: 1
+  winner: 1
+
+two:
+  tournament: 
+  team: 
+  team_two: 1
+  winner: 1

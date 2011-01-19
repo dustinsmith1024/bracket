@@ -10,11 +10,15 @@
   <b>Title:</b>
   <%= @tournament.title %>
 </p>
-
+<p>
+  <b>User:</b>
+  <%= @tournament.user.name %>
+</p>
 <p>
   <b>Content:</b>
   <%= @tournament.content %>
 </p>
+
 <% winner = [] %>
 <% winner[0] = Team.winner([1,16]) %>
 <% winner[1] = Team.winner([2,15]) %>
