@@ -2,7 +2,8 @@ class TournamentsController < ApplicationController
   # GET /tournaments
   # GET /tournaments.xml
   def index
-    @tournaments = Tournament.all
+    @user = User.find(params[:user_id])
+    @tournaments = @user.tournaments
 
     respond_to do |format|
       format.html # index.html.erb
@@ -13,6 +14,7 @@ class TournamentsController < ApplicationController
   # GET /tournaments/1
   # GET /tournaments/1.xml
   def show
+    @user = User.find(params[:user_id])
     @tournament = Tournament.find(params[:id])
     respond_to do |format|
       format.html # show.html.erb
@@ -23,7 +25,8 @@ class TournamentsController < ApplicationController
   # GET /tournaments/new
   # GET /tournaments/new.xml
   def new
-    @tournament = Tournament.new
+    @user = User.find(params[:user_id])
+    @tournament = @user.tournament.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -33,13 +36,15 @@ class TournamentsController < ApplicationController
 
   # GET /tournaments/1/edit
   def edit
+    @user = User.find(params[:user_id])
     @tournament = Tournament.find(params[:id])
   end
 
   # POST /tournaments
   # POST /tournaments.xml
   def create
-    @tournament = Tournament.new(params[:tournament])
+    @user = User.find(params[:user_id])
+    @tournament = @user.tournament.new(params[:tournament])
 
     respond_to do |format|
       if @tournament.save
@@ -55,7 +60,8 @@ class TournamentsController < ApplicationController
   # PUT /tournaments/1
   # PUT /tournaments/1.xml
   def update
-    @tournament = Tournament.find(params[:id])
+    @user = User.find(params[:user_id])
+    @tournament = @user.tournament.find(params[:id])
 
     respond_to do |format|
       if @tournament.update_attributes(params[:tournament])
@@ -71,7 +77,8 @@ class TournamentsController < ApplicationController
   # DELETE /tournaments/1
   # DELETE /tournaments/1.xml
   def destroy
-    @tournament = Tournament.find(params[:id])
+    @user = User.find(params[:user_id])
+    @tournament = @user.tournament.find(params[:id])
     @tournament.destroy
 
     respond_to do |format|

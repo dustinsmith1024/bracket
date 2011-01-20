@@ -1,23 +1,21 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <b>Name:</b>
-  <%= @team.name %>
-</p>
+<h2>
+  <%= @team.name %> <%= @team.mascot %>
+</h2>
 
-<p>
-  <b>Mascot:</b>
-  <%= @team.mascot %>
-</p>
-
-Current Tags:<br/>
+<h2>Current Tags:</h2>
 <% @team.tags.each do |tag| %>
-  <%= tag.name %><br/>
+  <%= tag.kind %>: <%= tag.name %><br/>
 <% end %>
 
-Possible Tags:<br/>
+<h2>Possible Tags:</h2>
+<% saved_kind = '' %>
 <% @tags.each do |tag| %>
-  <%= link_to tag.name, add_tag_path(@team,tag), :method => :post %><br/>
+  <% if saved_kind != tag.kind %>
+  <strong><%= tag.kind %>'s:</strong><br/>
+  <% end %>  <% saved_kind = tag.kind %>
+--<%= link_to tag.name, add_tag_path(@team,tag), :method => :post %><br/>
 <% end %>
 
 <%= link_to 'Edit', edit_team_path(@team) %> |

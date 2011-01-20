@@ -9,7 +9,20 @@
   <b>Team:</b>
   <%= @user.team.name %>
 </p>
+<h2>Tournaments:</h2>
+<% @tournaments.each do |tournament| %>
+  <%= link_to tournament.name, user_tournament_path(@user,tournament) %><br/>
+<% end %>
+<br/>
+<h2>Current Tags:</h2>
+<% @user.tags.each do |tag| %>
+  <%= tag.name %><br/>
+<% end %>
 
+<h2>Possible Tags:</h2>
+<% @tags.each do |tag| %>
+  <%= link_to tag.name, add_user_tag_path(@user,tag), :method => :post %><br/>
+<% end %>
 
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>

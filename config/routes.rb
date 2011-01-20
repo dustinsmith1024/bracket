@@ -1,5 +1,5 @@
 Bracket::Application.routes.draw do
-  resources :users
+  #resources :users
 
   get "pages/home"
   get "pages/info"
@@ -7,9 +7,11 @@ Bracket::Application.routes.draw do
 
   resources :tags
   resources :teams
-  resources :tournaments
-
+  resources :users do
+    resources :tournaments
+  end
   match 'teams/:id/add/:tag_id' => 'teams#add_tag', :as => :add_tag, :via => :post
+  match 'users/:id/add/:tag_id' => 'users#add_tag', :as => :add_user_tag, :via => :post
 
   root :to => "pages#home"
 

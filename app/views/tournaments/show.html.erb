@@ -12,7 +12,7 @@
 </p>
 <p>
   <b>User:</b>
-  <%= @tournament.user.name %>
+  <%= @tournament.user.name unless @tournament.user.nil?%>
 </p>
 <p>
   <b>Content:</b>
@@ -20,21 +20,21 @@
 </p>
 
 <% winner = [] %>
-<% winner[0] = Team.winner([1,16]) %>
-<% winner[1] = Team.winner([2,15]) %>
-<% winner[2] = Team.winner([3,14]) %>
-<% winner[3] = Team.winner([4,13]) %>
-<% winner[4] = Team.winner([5,12]) %>
-<% winner[5] = Team.winner([6,11]) %>
-<% winner[6] = Team.winner([7,10]) %>
-<% winner[7] = Team.winner([8,9]) %>
-<% winner[8] = Team.winner([winner[0],winner[7]]) %>
-<% winner[9] = Team.winner([winner[1],winner[6]]) %>
-<% winner[10] = Team.winner([winner[2],winner[5]]) %>
-<% winner[11] = Team.winner([winner[3],winner[4]]) %>
-<% winner[12] = Team.winner([winner[8],winner[11]]) %>
-<% winner[13] = Team.winner([winner[10],winner[9]]) %>
-<% winner[14] = Team.winner([winner[12],winner[13]]) %>
+<% winner[0] = Team.winner([1,16],@user) %>
+<% winner[1] = Team.winner([2,15],@user) %>
+<% winner[2] = Team.winner([3,14],@user) %>
+<% winner[3] = Team.winner([4,13],@user) %>
+<% winner[4] = Team.winner([5,12],@user) %>
+<% winner[5] = Team.winner([6,11],@user) %>
+<% winner[6] = Team.winner([7,10],@user) %>
+<% winner[7] = Team.winner([8,9],@user) %>
+<% winner[8] = Team.winner([winner[0],winner[7]],@user) %>
+<% winner[9] = Team.winner([winner[1],winner[6]],@user) %>
+<% winner[10] = Team.winner([winner[2],winner[5]],@user) %>
+<% winner[11] = Team.winner([winner[3],winner[4]],@user) %>
+<% winner[12] = Team.winner([winner[8],winner[11]],@user) %>
+<% winner[13] = Team.winner([winner[10],winner[9]],@user) %>
+<% winner[14] = Team.winner([winner[12],winner[13]],@user) %>
 
 
 <table>
@@ -132,6 +132,6 @@
   <td class="bb br"><%= Team.find_by_seed(15).n %></td><td></td><td></td><td></td><td></td>
 </tr>
 </table>
-<%= link_to 'Edit', edit_tournament_path(@tournament) %> |
-<%= link_to 'Back', tournaments_path %>
+<%= link_to 'Edit', edit_user_tournament_path(@user,@tournament) %> |
+<%= link_to 'Back', user_tournaments_path(@user) %>
 </div>

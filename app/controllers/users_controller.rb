@@ -10,11 +10,22 @@ class UsersController < ApplicationController
     end
   end
 
+  def add_tag
+    @user = User.find(params[:id])
+    @tag = Tag.find(params[:tag_id])
+
+    @user.tags << @tag
+    respond_to do |format|
+        format.html { redirect_to(user_url(@user), :notice => 'Tag was successfully created.') }
+    end
+  end
+
   # GET /users/1
   # GET /users/1.xml
   def show
     @user = User.find(params[:id])
-
+    @tournaments = @user.tournaments
+    @tags = Tag.all
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @user }

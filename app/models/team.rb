@@ -11,16 +11,18 @@ def self.random
   self.find_by_id(rand(Team.count) + 1)
 end
 
-def self.winner(teams, name=false)
+def self.winner(teams, user, name=false)
   if name==false
     up = 0;
     over = 0;
     teams = teams.sort
 ## FILL IN FROM USER -> MY TEAM
-    user_team = Team.find_by_name("Iowa")
+#    user_team = Team.find_by_name("Iowa")
+    user_team = user.team
 ## FILL IN FROM USER -> TAGS EVENTUALLY, WHICH ARE FED FROM QUESTIONS!
-    user_tags = %w{Blue Yellow Bird}
-    user_tags << "Bird - Real"  ## PUSH ON ONE WITH SPACES...
+#    user_tags = %w{Blue Yellow Bird}
+#    user_tags << "Bird - Real"  ## PUSH ON ONE WITH SPACES...
+    user_tags = user.tags
     team_tags = user_team.tags.collect {|t| t.name}
     logger.info(user_tags)
     logger.info(team_tags)
@@ -144,6 +146,7 @@ logger.info("OVER: " + over.to_s + " UP: " + up.to_s)
     return teams[t]
 
   else
+## RANDOMLY PICKS A TEAM...50/50
     self.find(teams.sample).name
   end
 end

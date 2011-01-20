@@ -14,16 +14,16 @@
 <% @tournaments.each do |tournament| %>
   <tr>
     <td><%= tournament.name %></td>
-    <td><%= tournament.user.name %></td>
+    <td><%= tournament.user.name unless tournament.user.nil? %></td>
     <td><%= tournament.title %></td>
     <td><%= tournament.content %></td>
-    <td><%= link_to 'Show', tournament %></td>
-    <td><%= link_to 'Edit', edit_tournament_path(tournament) %></td>
-    <td><%= link_to 'Destroy', tournament, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= link_to 'Show', user_tournament_path(@user,tournament) %></td>
+    <td><%= link_to 'Edit', edit_user_tournament_path(@user,tournament) %></td>
+    <td><%= link_to 'Destroy', user_tournament_path(@user,tournament), :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New Tournament', new_tournament_path %>
+<%= link_to 'New Tournament', new_user_tournament_path(@user) %>
