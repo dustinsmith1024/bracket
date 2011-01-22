@@ -10,13 +10,20 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110119041905) do
+ActiveRecord::Schema.define(:version => 20110122214846) do
 
   create_table "games", :force => true do |t|
+    t.integer  "number"
     t.integer  "tournament_id"
-    t.integer  "team_one_id"
-    t.integer  "team_two_id"
-    t.integer  "winner_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "status"
+  end
+
+  create_table "participants", :force => true do |t|
+    t.integer  "game_id"
+    t.integer  "team_id"
+    t.boolean  "winner"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -28,15 +35,28 @@ ActiveRecord::Schema.define(:version => 20110119041905) do
     t.datetime "updated_at"
   end
 
+  add_index "tags", ["name", "kind"], :name => "by_name_and_kind", :unique => true
+
   create_table "tags_teams", :id => false, :force => true do |t|
     t.integer "team_id"
     t.integer "tag_id"
   end
 
+  add_index "tags_teams", ["tag_id", "team_id"], :name => "by_tag_and_team", :unique => true
+
+  create_table "tags_tournaments", :id => false, :force => true do |t|
+    t.integer "tournament_id"
+    t.integer "tag_id"
+  end
+
+  add_index "tags_tournaments", ["tournament_id", "tag_id"], :name => "by_tournament_and_tag", :unique => true
+
   create_table "tags_users", :id => false, :force => true do |t|
     t.integer "user_id"
     t.integer "tag_id"
   end
+
+  add_index "tags_users", ["tag_id", "user_id"], :name => "by_tag_and_user", :unique => true
 
   create_table "teams", :force => true do |t|
     t.string   "name"

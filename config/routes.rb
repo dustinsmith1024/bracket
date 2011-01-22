@@ -1,4 +1,10 @@
 Bracket::Application.routes.draw do
+  resources :participants
+
+  resources :plays
+
+  resources :games
+
   #resources :users
 
   get "pages/home"
@@ -12,6 +18,10 @@ Bracket::Application.routes.draw do
   end
   match 'teams/:id/add/:tag_id' => 'teams#add_tag', :as => :add_tag, :via => :post
   match 'users/:id/add/:tag_id' => 'users#add_tag', :as => :add_user_tag, :via => :post
+  match 'tournaments/:id/add/:tag_id' => 'tournaments#add_tag', :as => :add_tournament_tag, :via => :post
+  match 'teams/:id/remove/:tag_id' => 'teams#remove_tag', :as => :remove_tag, :via => :post
+  match 'users/:id/remove/:tag_id' => 'users#remove_tag', :as => :remove_user_tag, :via => :post
+  match 'tournaments/:id/remove/:tag_id' => 'tournaments#remove_tag', :as => :remove_tournament_tag, :via => :post
 
   root :to => "pages#home"
 

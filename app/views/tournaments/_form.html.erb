@@ -1,4 +1,4 @@
-<%= form_for(@tournament) do |f| %>
+<%= form_for([@user,@tournament]) do |f| %>
   <% if @tournament.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@tournament.errors.count, "error") %> prohibited this tournament from being saved:</h2>
@@ -16,7 +16,7 @@
     <%= f.text_field :name %>
   </div>
 
-  <%= collection_select(:tournament, :user_id, User.all, :id, :name, :prompt => true, :selected => @tournament.user) %>
+  <%#= collection_select(:tournament, :user_id, User.all, :id, :name, :prompt => true, :selected => @tournament.user) %>
 
   <div class="field">
     <%= f.label :title %><br />

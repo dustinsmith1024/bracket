@@ -19,117 +19,109 @@
   <%= @tournament.content %>
 </p>
 
-<% winner = [] %>
-<% winner[0] = Team.winner([1,16],@user) %>
-<% winner[1] = Team.winner([2,15],@user) %>
-<% winner[2] = Team.winner([3,14],@user) %>
-<% winner[3] = Team.winner([4,13],@user) %>
-<% winner[4] = Team.winner([5,12],@user) %>
-<% winner[5] = Team.winner([6,11],@user) %>
-<% winner[6] = Team.winner([7,10],@user) %>
-<% winner[7] = Team.winner([8,9],@user) %>
-<% winner[8] = Team.winner([winner[0],winner[7]],@user) %>
-<% winner[9] = Team.winner([winner[1],winner[6]],@user) %>
-<% winner[10] = Team.winner([winner[2],winner[5]],@user) %>
-<% winner[11] = Team.winner([winner[3],winner[4]],@user) %>
-<% winner[12] = Team.winner([winner[8],winner[11]],@user) %>
-<% winner[13] = Team.winner([winner[10],winner[9]],@user) %>
-<% winner[14] = Team.winner([winner[12],winner[13]],@user) %>
+<h2>NOT NEEDED?? Current Tags: CHANGE TO BRACKET TAGS!</h2>
+<%# @tournament.tags.each do |tag| %>
+  <%#= tag.name %> <%#= link_to 'Remove', remove_tournament_tag_path(@tournament,tag), :method => :post %><br/>
+<%# end %>
 
+<h2>NOT NEEDED?? Possible Tags:</h2>
+<%# @tags.each do |tag| %>
+  <%#= link_to tag.name, add_tournament_tag_path(@tournament,tag), :method => :post %><br/>
+<%# end %>
 
 <table>
 <tr>
-  <td class="bb"><%= Team.find_by_seed(1).n %></td><td></td><td></td><td></td><td></td>
+  <td class="bb"><%= @tournament.games[0].teams[0].n %></td><td></td><td></td><td></td><td></td>
 </tr>
 <tr>
-  <td class="br"></td><td class="bb"><%= Team.find(winner[0]).n %></td><td></td><td></td><td></td>
+  <td class="br"></td><td class="bb"><%= @tournament.games[0].winner.team.n %></td><td></td><td></td><td></td>
 </tr>
 <tr>
-  <td class="bb br"><%= Team.find_by_seed(16).n %></td><td class="br"></td><td></td><td></td><td></td>
+  <td class="bb br"><%= @tournament.games[0].teams[1].n %></td><td class="br"></td><td></td><td></td><td></td>
 </tr>
 <tr>
-  <td></td><td class="br"></td><td class="bb"><%= Team.find(winner[8]).n %></td><td></td><td></td>
+  <td></td><td class="br"></td><td class="bb"><%= @tournament.games[8].winner.team.n %></td><td></td><td></td>
 </tr>
 <tr>
-  <td class="bb"><%= Team.find_by_seed(8).n %></td><td class="br"></td><td class="br"></td><td></td><td></td>
+  <td class="bb"><%= @tournament.games[7].teams[0].n %></td><td class="br"></td><td class="br"></td><td></td><td></td>
 </tr>
 <tr>
-  <td class="br"></td><td class="bb br"><%= Team.find(winner[7]).n %></td><td class="br"></td><td></td><td></td>
+  <td class="br"></td><td class="bb br"><%= @tournament.games[7].winner.team.n %></td><td class="br"></td><td></td><td></td>
 </tr>
 <tr>
-  <td class="bb br"><%= Team.find_by_seed(9).n %></td><td></td><td class="br"></td><td></td><td></td>
+  <td class="bb br"><%= @tournament.games[7].teams[1].n %></td><td></td><td class="br"></td><td></td><td></td>
 </tr>
 <tr>
-  <td class=""></td><td></td><td class="br"></td><td class="bb"><%= Team.find(winner[12]).n %></td><td></td>
+  <td class=""></td><td></td><td class="br"></td><td class="bb"><%= @tournament.games[12].winner.team.n %></td><td></td>
 </tr>
 <tr>
-  <td class="bb"><%= Team.find_by_seed(5).n %></td><td></td><td class="br"></td><td class="br"></td><td></td>
+  <td class="bb"><%= @tournament.games[4].teams[0].n %></td><td></td><td class="br"></td><td class="br"></td><td></td>
 </tr>
 <tr>
-  <td class="br"></td><td class="bb"><%= Team.find(winner[4]).n %></td><td class="br"></td><td class="br"></td><td></td>
+  <td class="br"></td><td class="bb"><%= @tournament.games[4].winner.team.n %></td><td class="br"></td><td class="br"></td><td></td>
 </tr>
 <tr>
-  <td class="bb br"><%= Team.find_by_seed(12).n %></td><td class="br"></td><td class="br"></td><td class="br"></td><td></td>
+  <td class="bb br"><%= @tournament.games[4].teams[1].n %></td><td class="br"></td><td class="br"></td><td class="br"></td><td></td>
 </tr>
 <tr>
-  <td ></td><td class="br"></td><td class="bb br"><%= Team.find(winner[11]).n %></td><td class="br"></td><td></td>
+  <td ></td><td class="br"></td><td class="bb br"><%= @tournament.games[11].winner.team.n %></td><td class="br"></td><td></td>
 </tr>
 <tr>
-  <td class="bb"><%= Team.find_by_seed(4).n %></td><td class="br"></td><td></td><td class="br"></td><td></td>
+  <td class="bb"><%= @tournament.games[3].teams[0].n %></td><td class="br"></td><td></td><td class="br"></td><td></td>
 </tr>
 <tr>
-  <td class="br"></td><td class="bb br"><%= Team.find(winner[3]).n %></td><td></td><td class="br"></td><td></td>
+  <td class="br"></td><td class="bb br"><%= @tournament.games[3].winner.team.n %></td><td></td><td class="br"></td><td></td>
 </tr>
 <tr>
-  <td class="bb br"><%= Team.find_by_seed(13).n %></td><td></td><td></td><td class="br"></td><td></td>
+  <td class="bb br"><%= @tournament.games[3].teams[1].n %></td><td></td><td></td><td class="br"></td><td></td>
 </tr>
 <tr>
-  <td class=""></td><td></td><td></td><td class="br"></td><td class="bb"><%= Team.find(winner[14]).n %></td>
+  <td class=""></td><td></td><td></td><td class="br"></td><td class="bb"><%= @tournament.games[14].winner.team.n %></td>
 </tr>
 <tr>
-  <td class="bb"><%= Team.find_by_seed(6).n %></td><td></td><td></td><td class="br"></td><td></td>
+  <td class="bb"><%= @tournament.games[5].teams[0].n %></td><td></td><td></td><td class="br"></td><td></td>
 </tr>
 <tr>
-  <td class="br"></td><td class="bb"><%=  Team.find(winner[5]).n %></td><td></td><td class="br"></td><td></td>
+  <td class="br"></td><td class="bb"><%= @tournament.games[5].winner.team.n %></td><td></td><td class="br"></td><td></td>
 </tr>
 <tr>
-  <td class="bb br"><%= Team.find_by_seed(11).n %></td><td class="br"></td><td></td><td class="br"></td><td></td>
+  <td class="bb br"><%= @tournament.games[5].teams[1].n %></td><td class="br"></td><td></td><td class="br"></td><td></td>
 </tr>
 <tr>
-  <td ></td><td class="br"></td><td class="bb"><%= Team.find(winner[10]).n %></td><td class="br"></td><td></td>
+  <td ></td><td class="br"></td><td class="bb"><%= @tournament.games[10].winner.team.n %></td><td class="br"></td><td></td>
 </tr>
 <tr>
-  <td class="bb"><%= Team.find_by_seed(3).n %></td><td class="br"></td><td class="br"></td><td class="br"></td><td></td>
+  <td class="bb"><%= @tournament.games[2].teams[0].n %></td><td class="br"></td><td class="br"></td><td class="br"></td><td></td>
 </tr>
 <tr>
-  <td class="br"></td><td class="bb br"><%=  Team.find(winner[2]).n %></td><td class="br"></td><td class="br"></td><td></td>
+  <td class="br"></td><td class="bb br"><%= @tournament.games[2].winner.team.n %></td><td class="br"></td><td class="br"></td><td></td>
 </tr>
 <tr>
-  <td class="bb br"><%= Team.find_by_seed(14).n %></td><td></td><td class="br"></td><td class="br"></td><td></td>
+  <td class="bb br"><%= @tournament.games[2].teams[1].n %></td><td></td><td class="br"></td><td class="br"></td><td></td>
 </tr>
 <tr>
-  <td ></td><td></td><td class="br"></td><td class="bb br"><%= Team.find(winner[13]).n %></td><td></td>
+  <td ></td><td></td><td class="br"></td><td class="bb br"><%= @tournament.games[13].winner.team.n %></td><td></td>
 </tr>
 <tr>
-  <td class="bb"><%= Team.find_by_seed(7).n %></td><td></td><td class="br"></td><td></td><td></td>
+  <td class="bb"><%= @tournament.games[6].teams[0].n%></td><td></td><td class="br"></td><td></td><td></td>
 </tr>
 <tr>
-  <td class="br"></td><td class="bb"><%= Team.find(winner[6]).n %></td><td class="br"></td><td></td><td></td>
+  <td class="br"></td><td class="bb"><%= @tournament.games[6].winner.team.n %></td><td class="br"></td><td></td><td></td>
 </tr>
 <tr>
-  <td class="bb br"><%= Team.find_by_seed(10).n %></td><td class="br"></td><td class="br"></td><td></td><td></td>
+  <td class="bb br"><%= @tournament.games[6].teams[1].n %></td><td class="br"></td><td class="br"></td><td></td><td></td>
 </tr>
 <tr>
-  <td></td><td class="br"></td><td class="bb br"><%=  Team.find(winner[9]).n %></td><td></td><td></td>
+  <td></td><td class="br"></td><td class="bb br"><%= @tournament.games[9].winner.team.n %></td><td></td><td></td>
 </tr>
 <tr>
-  <td class="bb"><%= Team.find_by_seed(2).n %></td><td class="br"></td><td></td><td></td><td></td>
+  <td class="bb"><%= @tournament.games[1].teams[0].n %></td><td class="br"></td><td></td><td></td><td></td>
 </tr>
 <tr>
-  <td class="br"></td><td class="bb br"><%= Team.find(winner[1]).n %></td><td></td><td></td><td></td>
+  <td class="br"></td><td class="bb br"><%= @tournament.games[1].winner.team.n %></td><td></td><td></td><td></td>
 </tr>
 <tr>
-  <td class="bb br"><%= Team.find_by_seed(15).n %></td><td></td><td></td><td></td><td></td>
+  <td class="bb br"><%= @tournament.games[1].teams[1].n %></td><td></td><td></td><td></td><td></td>
 </tr>
 </table>
 <%= link_to 'Edit', edit_user_tournament_path(@user,@tournament) %> |

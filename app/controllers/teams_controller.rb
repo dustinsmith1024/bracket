@@ -20,6 +20,18 @@ class TeamsController < ApplicationController
     end
   end
 
+  def remove_tag
+    @team = Team.find(params[:id])
+    @tag = @team.tags.find(params[:tag_id])
+    respond_to do |format|
+      if @team.tags.delete(@tag)
+        format.html { redirect_to(team_url(@team), :notice => 'Tag was successfully deleted.') }
+      else
+        format.html { redirect_to(team_url(@team), :notice => 'Tag was not deleted!.') }
+      end
+    end
+  end
+
   # GET /teams/1
   # GET /teams/1.xml
   def show

@@ -1,9 +1,11 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 one:
-  number: 1
-  tournament: 
+  game: 
+  team: 
+  winner: false
 
 two:
-  number: 1
-  tournament: 
+  game: 
+  team: 
+  winner: false

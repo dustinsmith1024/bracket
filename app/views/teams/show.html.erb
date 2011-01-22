@@ -6,7 +6,7 @@
 
 <h2>Current Tags:</h2>
 <% @team.tags.each do |tag| %>
-  <%= tag.kind %>: <%= tag.name %><br/>
+  <%= tag.kind %>: <%= tag.name %> - <%= link_to 'Remove', remove_tag_path(@team,tag), :method => :post %><br/>
 <% end %>
 
 <h2>Possible Tags:</h2>

@@ -13,10 +13,12 @@
 <% @tournaments.each do |tournament| %>
   <%= link_to tournament.name, user_tournament_path(@user,tournament) %><br/>
 <% end %>
+<%= link_to 'New Tournament', new_user_tournament_path(@user) %><br/>
 <br/>
+
 <h2>Current Tags:</h2>
 <% @user.tags.each do |tag| %>
-  <%= tag.name %><br/>
+  <%= tag.name %> - <%= link_to 'Remove', remove_user_tag_path(@user,tag), :method => :post %><br/>
 <% end %>
 
 <h2>Possible Tags:</h2>

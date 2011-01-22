@@ -5,6 +5,8 @@ class Team < ActiveRecord::Base
   has_many :team_ones, :class_name => 'Game', :foreign_key => 'team_one_id'
   has_many :team_twos, :class_name => 'Game', :foreign_key => 'team_two_id'
   has_many :users
+  has_many :participants
+  has_many :games, :through => :participants
 #has_many :purchases, :class_name => 'Sale', :foreign_key => 'buyer_id'
 
 def self.random

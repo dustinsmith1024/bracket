@@ -2,5 +2,5 @@
 
 <%= render 'form' %>
 
-<%= link_to 'Show', @tournament %> |
-<%= link_to 'Back', tournaments_path %>
+<%= link_to 'Show', user_tournament_path(@user,@tournament) %> |
+<%= link_to 'Back', user_tournaments_path(@user) %>
