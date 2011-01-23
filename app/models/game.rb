@@ -29,30 +29,35 @@ class Game < ActiveRecord::Base
     user_team = user.team
     ## GRAB USER TAGS
 ## NEEDS TO CHANGE TO BRACKET TAGS!!!!! THEN YOU CAN HAVE MULTIPLE ANSWERS FOR DIFF BRACKETS
-    user_tags = user.tags
+    #user_tags = user.tags 
+    tournament_tags = tournament.tags.collect {|t| t.name}
     team_tags = user_team.tags.collect {|t| t.name}  ##METHOD THIS
-    logger.info(user_tags)
+    logger.info(tournament_tags)
     logger.info(team_tags)
     tmp_tags = []
     teams.each_with_index do |team,index|
     ## PUSH TAG NAMES ONTO AN ARRAY AND DEFINE IF NIL
       tmp_tags[index] ||= team.tags.collect{|t|t.name}
       if index == 0  ## IF THE FIRST TEAM THEN INCREASE THE OVER VAR TO HELP THE BEST SEED WIN
-        user_tags.each do |tag| ## LOOP THROUGH ALL TAGS TO SEE IF THEY MATCH
+        tournament_tags.each do |tag| ## LOOP THROUGH ALL TAGS TO SEE IF THEY MATCH
+#logger.info("LOOK FOR THIS TAG ->>>>> " + tag)
           if tmp_tags[index].include?(tag)
+#logger.info("FOUND A TAG ->>>>> " + tag)
             over += 2  ## GLOBAL VAR THIS EVENTUALLY
           end
         end
       else
       ## IF THE SECOND TEAM THEN INCREASE THE UP VAR TO MAKE UNDERDOGS WIN
-        user_tags.each do |tag|
+        tournament_tags.each do |tag|
+#logger.info("LOOK FOR THIS TAG ->>>>> " + tag)
           if tmp_tags[index].include?(tag)
+#logger.info("FOUND A TAG ->>>>> " + tag)
             up += 2
           end
         end
       end
     end
-
+#logger.info("Over #{over.to_s} - Up #{up.to_s}")
     ## UPS THE ODD IF YOUR TEAM IS SELECTED
     ## NOT SURE IF ITS RIGHT TO INCREASE UPSETS MORE OR NOT...TOP SEED ALREADY HAS ADVANTAGE THOUGH
     if teams[0] == user_team

@@ -30,13 +30,37 @@ class TournamentsController < ApplicationController
     end
   end
 
+  def redo
+    @tournament = Tournament.find(params[:id])
+
+    @tournament.clear
+
+    respond_to do |format|
+      format.html { redirect_to(user_tournament_url(@tournament.user,@tournament), :notice => 'Rebuilt!') }
+#      format.html # show.html.erb
+      format.xml  { render :xml => @tournament }
+    end
+  end
+
+
+  def questions
+    @tournament = Tournament.find(params[:id])
+    @user = @tournament.user
+    @tags = Tag.order("kind").all
+
+    respond_to do |format|
+      format.html # show.html.erb
+      format.xml  { render :xml => @tournament }
+    end
+  end
+
   def add_tag
     @tournament = Tournament.find(params[:id])
     @tag = Tag.find(params[:tag_id])
 
     @tournament.tags << @tag
     respond_to do |format|
-        format.html { redirect_to(user_tournament_url(@tournament.user,@tournament), :notice => 'Tag was successfully created.') }
+        format.html { redirect_to(tournament_questions_url(@tournament), :notice => 'Tag was successfully created.') }
     end
   end
 
@@ -45,9 +69,9 @@ class TournamentsController < ApplicationController
     @tag = @tournament.tags.find(params[:tag_id])
     respond_to do |format|
       if @tournament.tags.delete(@tag)
-        format.html { redirect_to(user_tournament_url(@tournament.user,@tournament), :notice => 'Tag was successfully deleted.') }
+        format.html { redirect_to(tournament_questions_url(@tournament), :notice => 'Tag was successfully deleted.') }
       else
-        format.html { redirect_to(user_tournament_url(@tournament.user,@tournament), :notice => 'Tag was NOT deleted.') }
+        format.html { redirect_to(tournament_questions_url(@tournament), :notice => 'Tag was NOT deleted.') }
       end
     end
   end
@@ -78,7 +102,7 @@ class TournamentsController < ApplicationController
 
     respond_to do |format|
       if @tournament.save
-        format.html { redirect_to(user_tournament_url(@user,@tournament), :notice => 'Tournament was successfully created.') }
+        format.html { redirect_to(user_tournaments_url(@user), :notice => 'Tournament was successfully created.') }
       else
         format.html { render :action => "new" }
       end
@@ -93,7 +117,7 @@ class TournamentsController < ApplicationController
 
     respond_to do |format|
       if @tournament.update_attributes(params[:tournament])
-        format.html { redirect_to(user_tournament_path(@user,@tournament), :notice => 'Tournament was successfully updated.') }
+        format.html { redirect_to(user_tournaments_path(@user), :notice => 'Tournament was successfully updated.') }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -106,11 +130,11 @@ class TournamentsController < ApplicationController
   # DELETE /tournaments/1.xml
   def destroy
     @user = User.find(params[:user_id])
-    @tournament = @user.tournament.find(params[:id])
+    @tournament = @user.tournaments.find(params[:id])
     @tournament.destroy
 
     respond_to do |format|
-      format.html { redirect_to(tournaments_url) }
+      format.html { redirect_to(user_tournaments_url(@user)) }
       format.xml  { head :ok }
     end
   end

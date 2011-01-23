@@ -1,9 +1,7 @@
 Bracket::Application.routes.draw do
-  resources :participants
+#  resources :participants
 
-  resources :plays
-
-  resources :games
+  #resources :games
 
   #resources :users
 
@@ -22,6 +20,8 @@ Bracket::Application.routes.draw do
   match 'teams/:id/remove/:tag_id' => 'teams#remove_tag', :as => :remove_tag, :via => :post
   match 'users/:id/remove/:tag_id' => 'users#remove_tag', :as => :remove_user_tag, :via => :post
   match 'tournaments/:id/remove/:tag_id' => 'tournaments#remove_tag', :as => :remove_tournament_tag, :via => :post
+  match 'tournaments/:id/questions' => 'tournaments#questions', :as => :tournament_questions, :via => :get
+  match 'tournaments/:id/redo' => 'tournaments#redo', :as => :tournament_redo, :via => :post
 
   root :to => "pages#home"
 

@@ -19,15 +19,13 @@
   <%= @tournament.content %>
 </p>
 
-<h2>NOT NEEDED?? Current Tags: CHANGE TO BRACKET TAGS!</h2>
-<%# @tournament.tags.each do |tag| %>
-  <%#= tag.name %> <%#= link_to 'Remove', remove_tournament_tag_path(@tournament,tag), :method => :post %><br/>
-<%# end %>
+<h2>Tags Used:</h2>
+<% @tournament.tags.each do |tag| %>
+  <%= tag.name %> <br/>
+<% end %>
+<br/>
 
-<h2>NOT NEEDED?? Possible Tags:</h2>
-<%# @tags.each do |tag| %>
-  <%#= link_to tag.name, add_tournament_tag_path(@tournament,tag), :method => :post %><br/>
-<%# end %>
+<%= link_to 'Redo!', tournament_redo_url(@tournament), :method => 'post' %>
 
 <table>
 <tr>

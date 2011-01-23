@@ -18,6 +18,7 @@
     <td><%= tournament.title %></td>
     <td><%= tournament.content %></td>
     <td><%= link_to 'Show', user_tournament_path(@user,tournament) %></td>
+    <td><%= link_to 'Questions', tournament_questions_path(tournament) %></td>
     <td><%= link_to 'Edit', edit_user_tournament_path(@user,tournament) %></td>
     <td><%= link_to 'Destroy', user_tournament_path(@user,tournament), :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>

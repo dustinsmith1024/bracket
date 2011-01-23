@@ -1,0 +1,14 @@
+<h3>Tweak these to be questions, then add tags based on answers....</h3><br/>
+
+<%= link_to 'User Home', user_path(@tournament.user) %>
+
+<h2>Current Tags:</h2>
+<% @tournament.tags.each do |tag| %>
+  <%= tag.name %> - <%= link_to 'Remove', remove_tournament_tag_path(@tournament,tag), :method => :post %><br/>
+<% end %>
+
+<h2>Available Tags:</h2>
+<% @tags.each do |tag| %>
+  <%= link_to tag.name, add_tournament_tag_path(@tournament,tag), :method => :post %><br/>
+<% end %>
+

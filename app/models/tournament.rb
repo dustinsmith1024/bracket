@@ -3,6 +3,11 @@ class Tournament < ActiveRecord::Base
   belongs_to :user
   has_and_belongs_to_many :tags
 
+  def clear
+    Participant.destroy self.games.collect{|g|g.participants}
+    Game.destroy self.games
+  end
+
   def build_games
   ## LOOPS ALL GAMES AND PLAYS THEM...PROLLY NEEDS A BETTER NAME
    (1..15).each do |game_number|
