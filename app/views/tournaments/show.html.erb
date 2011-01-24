@@ -19,6 +19,11 @@
   <%= @tournament.content %>
 </p>
 
+<p>
+  <b>My Team:</b>
+  <%= @tournament.user.team.name + " " + @tournament.user.team.mascot unless @tournament.user.nil?%>
+</p>
+
 <h2>Tags Used:</h2>
 <% @tournament.tags.each do |tag| %>
   <%= tag.name %> <br/>
@@ -32,91 +37,91 @@
   <td class="bb"><%= @tournament.games[0].teams[0].n %></td><td></td><td></td><td></td><td></td>
 </tr>
 <tr>
-  <td class="br"></td><td class="bb"><%= @tournament.games[0].winner.team.n %></td><td></td><td></td><td></td>
+  <td class="br"></td><td class="bb"><%= @tournament.games[0].info %></td><td></td><td></td><td></td>
 </tr>
 <tr>
   <td class="bb br"><%= @tournament.games[0].teams[1].n %></td><td class="br"></td><td></td><td></td><td></td>
 </tr>
 <tr>
-  <td></td><td class="br"></td><td class="bb"><%= @tournament.games[8].winner.team.n %></td><td></td><td></td>
+  <td></td><td class="br"></td><td class="bb"><%= @tournament.games[8].info %></td><td></td><td></td>
 </tr>
 <tr>
   <td class="bb"><%= @tournament.games[7].teams[0].n %></td><td class="br"></td><td class="br"></td><td></td><td></td>
 </tr>
 <tr>
-  <td class="br"></td><td class="bb br"><%= @tournament.games[7].winner.team.n %></td><td class="br"></td><td></td><td></td>
+  <td class="br"></td><td class="bb br"><%= @tournament.games[7].info %></td><td class="br"></td><td></td><td></td>
 </tr>
 <tr>
   <td class="bb br"><%= @tournament.games[7].teams[1].n %></td><td></td><td class="br"></td><td></td><td></td>
 </tr>
 <tr>
-  <td class=""></td><td></td><td class="br"></td><td class="bb"><%= @tournament.games[12].winner.team.n %></td><td></td>
+  <td class=""></td><td></td><td class="br"></td><td class="bb"><%= @tournament.games[12].info %></td><td></td>
 </tr>
 <tr>
   <td class="bb"><%= @tournament.games[4].teams[0].n %></td><td></td><td class="br"></td><td class="br"></td><td></td>
 </tr>
 <tr>
-  <td class="br"></td><td class="bb"><%= @tournament.games[4].winner.team.n %></td><td class="br"></td><td class="br"></td><td></td>
+  <td class="br"></td><td class="bb"><%= @tournament.games[4].info %></td><td class="br"></td><td class="br"></td><td></td>
 </tr>
 <tr>
   <td class="bb br"><%= @tournament.games[4].teams[1].n %></td><td class="br"></td><td class="br"></td><td class="br"></td><td></td>
 </tr>
 <tr>
-  <td ></td><td class="br"></td><td class="bb br"><%= @tournament.games[11].winner.team.n %></td><td class="br"></td><td></td>
+  <td ></td><td class="br"></td><td class="bb br"><%= @tournament.games[11].info %></td><td class="br"></td><td></td>
 </tr>
 <tr>
   <td class="bb"><%= @tournament.games[3].teams[0].n %></td><td class="br"></td><td></td><td class="br"></td><td></td>
 </tr>
 <tr>
-  <td class="br"></td><td class="bb br"><%= @tournament.games[3].winner.team.n %></td><td></td><td class="br"></td><td></td>
+  <td class="br"></td><td class="bb br"><%= @tournament.games[3].info %></td><td></td><td class="br"></td><td></td>
 </tr>
 <tr>
   <td class="bb br"><%= @tournament.games[3].teams[1].n %></td><td></td><td></td><td class="br"></td><td></td>
 </tr>
 <tr>
-  <td class=""></td><td></td><td></td><td class="br"></td><td class="bb"><%= @tournament.games[14].winner.team.n %></td>
+  <td class=""></td><td></td><td></td><td class="br"></td><td class="bb"><%= @tournament.games[14].info %></td>
 </tr>
 <tr>
   <td class="bb"><%= @tournament.games[5].teams[0].n %></td><td></td><td></td><td class="br"></td><td></td>
 </tr>
 <tr>
-  <td class="br"></td><td class="bb"><%= @tournament.games[5].winner.team.n %></td><td></td><td class="br"></td><td></td>
+  <td class="br"></td><td class="bb"><%= @tournament.games[5].info %></td><td></td><td class="br"></td><td></td>
 </tr>
 <tr>
   <td class="bb br"><%= @tournament.games[5].teams[1].n %></td><td class="br"></td><td></td><td class="br"></td><td></td>
 </tr>
 <tr>
-  <td ></td><td class="br"></td><td class="bb"><%= @tournament.games[10].winner.team.n %></td><td class="br"></td><td></td>
+  <td ></td><td class="br"></td><td class="bb"><%= @tournament.games[10].info %></td><td class="br"></td><td></td>
 </tr>
 <tr>
   <td class="bb"><%= @tournament.games[2].teams[0].n %></td><td class="br"></td><td class="br"></td><td class="br"></td><td></td>
 </tr>
 <tr>
-  <td class="br"></td><td class="bb br"><%= @tournament.games[2].winner.team.n %></td><td class="br"></td><td class="br"></td><td></td>
+  <td class="br"></td><td class="bb br"><%= @tournament.games[2].info %></td><td class="br"></td><td class="br"></td><td></td>
 </tr>
 <tr>
   <td class="bb br"><%= @tournament.games[2].teams[1].n %></td><td></td><td class="br"></td><td class="br"></td><td></td>
 </tr>
 <tr>
-  <td ></td><td></td><td class="br"></td><td class="bb br"><%= @tournament.games[13].winner.team.n %></td><td></td>
+  <td ></td><td></td><td class="br"></td><td class="bb br"><%= @tournament.games[13].info %></td><td></td>
 </tr>
 <tr>
   <td class="bb"><%= @tournament.games[6].teams[0].n%></td><td></td><td class="br"></td><td></td><td></td>
 </tr>
 <tr>
-  <td class="br"></td><td class="bb"><%= @tournament.games[6].winner.team.n %></td><td class="br"></td><td></td><td></td>
+  <td class="br"></td><td class="bb"><%= @tournament.games[6].info %></td><td class="br"></td><td></td><td></td>
 </tr>
 <tr>
   <td class="bb br"><%= @tournament.games[6].teams[1].n %></td><td class="br"></td><td class="br"></td><td></td><td></td>
 </tr>
 <tr>
-  <td></td><td class="br"></td><td class="bb br"><%= @tournament.games[9].winner.team.n %></td><td></td><td></td>
+  <td></td><td class="br"></td><td class="bb br"><%= @tournament.games[9].info %></td><td></td><td></td>
 </tr>
 <tr>
   <td class="bb"><%= @tournament.games[1].teams[0].n %></td><td class="br"></td><td></td><td></td><td></td>
 </tr>
 <tr>
-  <td class="br"></td><td class="bb br"><%= @tournament.games[1].winner.team.n %></td><td></td><td></td><td></td>
+  <td class="br"></td><td class="bb br"><%= @tournament.games[1].info %></td><td></td><td></td><td></td>
 </tr>
 <tr>
   <td class="bb br"><%= @tournament.games[1].teams[1].n %></td><td></td><td></td><td></td><td></td>

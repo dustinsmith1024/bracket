@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110122214846) do
+ActiveRecord::Schema.define(:version => 20110124032527) do
 
   create_table "games", :force => true do |t|
     t.integer  "number"
@@ -18,7 +18,19 @@ ActiveRecord::Schema.define(:version => 20110122214846) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "status"
+    t.integer  "original_odds"
+    t.integer  "adjusted_odds"
   end
+
+  create_table "odds", :force => true do |t|
+    t.integer  "seed_one"
+    t.integer  "seed_two"
+    t.integer  "chance"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "odds", ["seed_one", "seed_two"], :name => "by_seed_one_and_seed_two", :unique => true
 
   create_table "participants", :force => true do |t|
     t.integer  "game_id"

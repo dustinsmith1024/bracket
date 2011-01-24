@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  seed_one: 1
+  seed_two: 
+  chance: 1
+
+two:
+  seed_one: 1
+  seed_two: 
+  chance: 1

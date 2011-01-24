@@ -7,12 +7,25 @@ class Game < ActiveRecord::Base
     self.participants.find_by_winner(true)
   end
 
+  def info
+    self.winner.team.n + " " + self.original_odds.to_s + " " + self.adjusted_odds.to_s
+  end
+
   def schedule_game(seeds)
     if self.participants.empty?
       self.participants.create([:team => Team.find_by_seed(seeds[0]), :winner => false])
       self.participants.create([:team => Team.find_by_seed(seeds[1]), :winner => false])
     end
     self.update_attributes(:status => 'Scheduled')
+  end
+
+### THOUGHT THIS WOULD WORK FOR STORING ODDS...BUT I CAN JUST STORE IT ON THE GAME I THINK
+  def odds=(chance)
+    @odds = chance
+  end
+
+  def odds
+    @odds ? @odds : 1
   end
 
   def scheduled?
@@ -23,17 +36,17 @@ class Game < ActiveRecord::Base
   unless(self.participants.empty?)
     teams = self.teams.order("seed")  ## NEED HIGH SEED FIRST -> SHOULD ALREADY BUIT JUST IN CASE
     user = self.tournament.user
-  
+logger.info("Teams: " + teams[0].n + " " + teams[1].n)
     up, over = 0, 0;
     ## GRAB USER TEAM
     user_team = user.team
     ## GRAB USER TAGS
 ## NEEDS TO CHANGE TO BRACKET TAGS!!!!! THEN YOU CAN HAVE MULTIPLE ANSWERS FOR DIFF BRACKETS
     #user_tags = user.tags 
-    tournament_tags = tournament.tags.collect {|t| t.name}
+    tournament_tags = self.tournament.tags.collect {|t| t.name}
     team_tags = user_team.tags.collect {|t| t.name}  ##METHOD THIS
-    logger.info(tournament_tags)
-    logger.info(team_tags)
+    logger.info("Tourney tags: " + tournament_tags.to_s)
+    logger.info("User Team tags: " + team_tags.to_s)
     tmp_tags = []
     teams.each_with_index do |team,index|
     ## PUSH TAG NAMES ONTO AN ARRAY AND DEFINE IF NIL
@@ -69,81 +82,16 @@ class Game < ActiveRecord::Base
     end
 
     logger.info("OVER: " + over.to_s + " UP: " + up.to_s)
-    if teams[0].seed == 1
-      t = case teams[1].seed
-        when 1..2 then Game.ods(1 + over - up) ? 1 : 0
-        when 3..4 then Game.ods(2 + over - up) ? 1 : 0
-        when 5..9 then Game.ods(5 + over - up) ? 1 : 0
-        when 10..12 then Game.ods(8 + over - up) ? 1 : 0
-        when 13..16 then Game.ods(90 + over - up) ? 1 : 0
-      end
-    end
-    if teams[0].seed == 2
-      t = case teams[1].seed
-        when 1..3 then Game.ods(1 + over - up) ? 1 : 0
-        when 4..6 then Game.ods(2 + over - up) ? 1 : 0
-        when 7..9 then Game.ods(4 + over - up) ? 1 : 0
-        when 10..12 then Game.ods(8 + over - up) ? 1 : 0
-        when 13..16 then Game.ods(15 + over - up) ? 1 : 0
-      end
-    end
-    if teams[0].seed == 3
-      t = case teams[1].seed
-        when 1..2 then Game.ods(4 + over - up) ? 0 : 1
-        when 3..4 then Game.ods(1 + over - up) ? 1 : 0
-        when 5..7 then Game.ods(3 + over - up) ? 1 : 0
-        when 8..10 then Game.ods(5 + over - up) ? 1 : 0
-        when 11..16 then Game.ods(10 + over - up) ? 1 : 0
-      end
-    end
-    if teams[0].seed == 4
-      t = case teams[1].seed
-        when 1..3 then Game.ods(3 + over - up) ? 0 : 1
-        when 4..6 then Game.ods(1 + over - up) ? 1 : 0
-        when 7..9 then Game.ods(3 + over - up) ? 1 : 0
-        when 10..12 then Game.ods(6 + over - up) ? 1 : 0
-        when 13..16 then Game.ods(9 + over - up) ? 1 : 0
-      end
-    end
-    if teams[0].seed == 5
-      t = case teams[1].seed
-        when 1..2 then Game.ods(4 + over - up) ? 0 : 1
-        when 3..4 then Game.ods(2 + over - up) ? 0 : 1
-        when 5..7 then Game.ods(1 + over - up) ? 1 : 1
-        when 8..10 then Game.ods(6 + over - up) ? 1 : 0
-        when 11..16 then Game.ods(9 + over - up) ? 1 : 0
-      end
-    end
-    if teams[0].seed == 6
-      t = case teams[1].seed
-        when 1..3 then Game.ods(5 + over - up) ? 0 : 1
-        when 4..6 then Game.ods(3 + over - up) ? 0 : 1
-        when 7..9 then Game.ods(1 + over - up) ? 1 : 0
-        when 10..12 then Game.ods(3 + over - up) ? 1 : 0
-        when 13..16 then Game.ods(5 + over - up) ? 1 : 0
-      end
-    end
-    if teams[0].seed == 7
-      t = case teams[1].seed
-        when 1..3 then Game.ods(5 + over - up) ? 0 : 1
-        when 4..6 then Game.ods(3 + over - up) ? 0 : 1
-        when 7..9 then Game.ods(1 + over - up) ? 1 : 0
-        when 10..12 then Game.ods(3 + over - up) ? 1 : 0
-        when 13..16 then Game.ods(5 + over - up) ? 1 : 0
-      end
-    end
-    if teams[0].seed >= 8
-     ## ALL ODDS FOR 1 vs matchups
-     ## ALL OTHER MATCHUPS SHOULD HAVE BEEN HANDELED ABOVE
-      t = case teams[1].seed
-        when 8..9 then Game.ods(1 + over - up) ? 1 : 0
-        when 10..12 then Game.ods(3 + over - up) ? 1 : 0
-        when 13..16 then Game.ods(5 + over - up) ? 1 : 0
-      end
-    end
-    logger.info("Winning Seed = " + t.to_s)
+
+    self.update_attribute(:original_odds, Odds.game_odds(teams[0].seed,teams[1].seed))
+    self.update_attribute(:adjusted_odds, (self.original_odds + over - up))
+# CHANGE NAME OF .ods
+    t = Game.ods(self.adjusted_odds) ? 1 : 0
+    
+    logger.info("Winning Team  = " + t.to_s)
     ## UPDATE WINNER BOOLEAN IN DB - HAVE TO USE PARTICIPANTS NOT TEAM HERE
-    self.participants[t].update_attributes(:winner => true)
+    self.participants.find_by_team_id(teams[t]).update_attributes(:winner => true)
+#    self.participants[t].update_attributes(:winner => true)
     self.update_attributes(:status => 'Played')
     return teams[t]  #WINNER
 
@@ -154,18 +102,19 @@ class Game < ActiveRecord::Base
 
   def self.ods(chance=0)
 ## RETURNS FALSE IF LESS THAN 1
-# IF - then we need to switch the odds somewhow...
     if chance > 0
-      r = rand(chance)
-      logger.info(r)
-      (r<1)
-    else
-      r = rand(chance)
-      logger.info(r.to_s + " upset possible" )
-      if r<1
-        false
+      r = rand(chance)  # SETS R TO RANDOM INTEGER LESS THAN THE CHANCE NUMBER if 4 then it will be 0-3
+      logger.info("Number: " + r.to_s + " Chance: " + chance.to_s)
+      (r<1)             # SHOULD BE TRUE THE MAJORITY OF THE TIME
+    else                # IF -negative then we need to switch the odds in favor of underdog
+      r = rand(chance)  
+      logger.info("-----------------------")
+      if r<1 
+      logger.info(r.to_s + " upset possible but didn't happen" )
+        false # TOP SEED WON DESPITE THE ODDS
       else
-        true
+      logger.info(r.to_s + " upset happened!" )
+        true  # UPSET BECASUE OF THE 
       end
     end
   end
