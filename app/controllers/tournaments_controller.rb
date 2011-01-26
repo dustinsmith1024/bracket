@@ -36,7 +36,7 @@ class TournamentsController < ApplicationController
     @tournament.clear
 
     respond_to do |format|
-      format.html { redirect_to(user_tournament_url(@tournament.user,@tournament), :notice => 'Rebuilt!') }
+      format.html { redirect_to(user_url(@tournament.user,@tournament), :notice => 'Rebuilt!') }
 #      format.html # show.html.erb
       format.xml  { render :xml => @tournament }
     end
@@ -102,7 +102,7 @@ class TournamentsController < ApplicationController
 
     respond_to do |format|
       if @tournament.save
-        format.html { redirect_to(user_tournaments_url(@user), :notice => 'Tournament was successfully created.') }
+        format.html { redirect_to(user_url(@user), :notice => 'Tournament was successfully created.') }
       else
         format.html { render :action => "new" }
       end
@@ -117,7 +117,7 @@ class TournamentsController < ApplicationController
 
     respond_to do |format|
       if @tournament.update_attributes(params[:tournament])
-        format.html { redirect_to(user_tournaments_path(@user), :notice => 'Tournament was successfully updated.') }
+        format.html { redirect_to(user_path(@user), :notice => 'Tournament was successfully updated.') }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -134,7 +134,7 @@ class TournamentsController < ApplicationController
     @tournament.destroy
 
     respond_to do |format|
-      format.html { redirect_to(user_tournaments_url(@user)) }
+      format.html { redirect_to(user_url(@user)) }
       format.xml  { head :ok }
     end
   end

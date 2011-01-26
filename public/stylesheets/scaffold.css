@@ -1,10 +1,34 @@
 body { background-color: #fff; color: #333;
 }
 
+body {
+}
+
 body, p, ol, ul, td {
   font-family: verdana, arial, helvetica, sans-serif;
   font-size:   13px;
   line-height: 18px;
+}
+
+.header {
+ position: absolute;
+ left: 0px;
+ top: 0px;
+ width: 100%;
+ padding: 10px;
+ background-color: navy;
+ color: white;
+}
+
+.header a:visited { color: #fff; }
+.header a { color: #fff; }
+
+.main-content {
+  margin-top: 50px;
+  background-color: white;
+  width: auto;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 pre {

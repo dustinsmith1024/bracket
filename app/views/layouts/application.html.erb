@@ -3,10 +3,11 @@
 <head>
   <title>Bracket</title>
   <%= stylesheet_link_tag :all %>
-  <%= javascript_include_tag :defaults %>
+  <%= javascript_include_tag :all %>
   <%= csrf_meta_tag %>
 </head>
 <body>
+<div class="header">
 <ul>
 <li>Links: </li>
 <li><%= link_to "Home", pages_home_path %></li>
@@ -14,8 +15,10 @@
 <li><%= link_to "Contact", pages_contact_path %></li>
 <li>>></li>
 <li><%= link_to "About", pages_info_path %></li>
+<% unless @user.nil? %>
 <li>>></li>
-<li><%#= link_to "Bracket", tournaments_path %></li>
+<li><%= link_to "My Brackets", user_path(@user) %></li>
+<% end %>
 <li>>></li>
 <li><%= link_to "Tags", tags_path %></li>
 <li>>></li>
@@ -25,7 +28,9 @@
 <li> </li>
 </ul>
 <br />
+</div>
+<div class="main-content">
 <%= yield %>
-
+</div>
 </body>
 </html>

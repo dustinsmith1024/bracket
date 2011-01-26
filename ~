@@ -3,15 +3,6 @@
 <%= link_to 'User Home', user_path(@tournament.user) %><br/><br/>
 
 What's your favorite animal? <%= collection_select(:tournament, :tags, Tag.find_all_by_kind("Animal"), :id, :name) %>
-<br/>
-What's your favorite color?  <%= collection_select(:tournament, :tags, Tag.find_all_by_kind("Color"), :id, :name) %>
-<br/>
-What's your favorite conference?  <%= collection_select(:tournament, :tags, Tag.find_all_by_kind("Conference"), :id, :name) %>
-<br/>
-God or the Devil?  <%= collection_select(:tournament, :tags, Tag.find_all_by_kind("Deity"), :id, :name) %>
-<br/>
-Cowboys or Indians...or Kings??  <%= collection_select(:tournament, :tags, Tag.find_all_by_kind("Person"), :id, :name) %>
-<br/>
 <h2>Current Tags:</h2>
 <% @tournament.tags.each do |tag| %>
   <%= tag.name %> - <%= link_to 'Remove', remove_tournament_tag_path(@tournament,tag), :method => :post %><br/>
