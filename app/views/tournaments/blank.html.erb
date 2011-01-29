@@ -1,0 +1,132 @@
+<div class="light">
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @tournament.name %>
+</p>
+
+<p>
+  <b>Title:</b>
+  <%= @tournament.title %>
+</p>
+<p>
+  <b>User:</b>
+  <%= @tournament.user.name unless @tournament.user.nil?%>
+</p>
+<p>
+  <b>Content:</b>
+  <%= @tournament.content %>
+</p>
+
+<p>
+  <b>My Team:</b>
+  <%= @tournament.user.team.name + " " + @tournament.user.team.mascot unless @tournament.user.nil?%>
+</p>
+
+<h2>Tags Used:</h2>
+<% @tournament.tags.each do |tag| %>
+  <%= tag.name %> <br/>
+<% end %>
+<br/>
+
+<%= link_to 'Redo!', tournament_redo_url(@tournament), :method => 'post' %>
+
+<table>
+<tr>
+  <td class="bb"><%= @tournament.games[0].teams[0].n %></td><td></td><td></td><td></td><td></td>
+</tr>
+<tr>
+  <td class="br"></td><td class="bb"><%= @tournament.games[0].info %></td><td></td><td></td><td></td>
+</tr>
+<tr>
+  <td class="bb br"><%= @tournament.games[0].teams[1].n %></td><td class="br"></td><td></td><td></td><td></td>
+</tr>
+<tr>
+  <td></td><td class="br"></td><td class="bb"><%= @tournament.games[8].info %></td><td></td><td></td>
+</tr>
+<tr>
+  <td class="bb"><%= @tournament.games[7].teams[0].n %></td><td class="br"></td><td class="br"></td><td></td><td></td>
+</tr>
+<tr>
+  <td class="br"></td><td class="bb br"><%= @tournament.games[7].info %></td><td class="br"></td><td></td><td></td>
+</tr>
+<tr>
+  <td class="bb br"><%= @tournament.games[7].teams[1].n %></td><td></td><td class="br"></td><td></td><td></td>
+</tr>
+<tr>
+  <td class=""></td><td></td><td class="br"></td><td class="bb"><%= @tournament.games[12].info %></td><td></td>
+</tr>
+<tr>
+  <td class="bb"><%= @tournament.games[4].teams[0].n %></td><td></td><td class="br"></td><td class="br"></td><td></td>
+</tr>
+<tr>
+  <td class="br"></td><td class="bb"><%= @tournament.games[4].info %></td><td class="br"></td><td class="br"></td><td></td>
+</tr>
+<tr>
+  <td class="bb br"><%= @tournament.games[4].teams[1].n %></td><td class="br"></td><td class="br"></td><td class="br"></td><td></td>
+</tr>
+<tr>
+  <td ></td><td class="br"></td><td class="bb br"><%= @tournament.games[11].info %></td><td class="br"></td><td></td>
+</tr>
+<tr>
+  <td class="bb"><%= @tournament.games[3].teams[0].n %></td><td class="br"></td><td></td><td class="br"></td><td></td>
+</tr>
+<tr>
+  <td class="br"></td><td class="bb br"><%= @tournament.games[3].info %></td><td></td><td class="br"></td><td></td>
+</tr>
+<tr>
+  <td class="bb br"><%= @tournament.games[3].teams[1].n %></td><td></td><td></td><td class="br"></td><td></td>
+</tr>
+<tr>
+  <td class=""></td><td></td><td></td><td class="br"></td><td class="bb"><%= @tournament.games[14].info %></td>
+</tr>
+<tr>
+  <td class="bb"><%= @tournament.games[5].teams[0].n %></td><td></td><td></td><td class="br"></td><td></td>
+</tr>
+<tr>
+  <td class="br"></td><td class="bb"><%= @tournament.games[5].info %></td><td></td><td class="br"></td><td></td>
+</tr>
+<tr>
+  <td class="bb br"><%= @tournament.games[5].teams[1].n %></td><td class="br"></td><td></td><td class="br"></td><td></td>
+</tr>
+<tr>
+  <td ></td><td class="br"></td><td class="bb"><%= @tournament.games[10].info %></td><td class="br"></td><td></td>
+</tr>
+<tr>
+  <td class="bb"><%= @tournament.games[2].teams[0].n %></td><td class="br"></td><td class="br"></td><td class="br"></td><td></td>
+</tr>
+<tr>
+  <td class="br"></td><td class="bb br"><%= @tournament.games[2].info %></td><td class="br"></td><td class="br"></td><td></td>
+</tr>
+<tr>
+  <td class="bb br"><%= @tournament.games[2].teams[1].n %></td><td></td><td class="br"></td><td class="br"></td><td></td>
+</tr>
+<tr>
+  <td ></td><td></td><td class="br"></td><td class="bb br"><%= @tournament.games[13].info %></td><td></td>
+</tr>
+<tr>
+  <td class="bb"><%= @tournament.games[6].teams[0].n%></td><td></td><td class="br"></td><td></td><td></td>
+</tr>
+<tr>
+  <td class="br"></td><td class="bb"><%= @tournament.games[6].info %></td><td class="br"></td><td></td><td></td>
+</tr>
+<tr>
+  <td class="bb br"><%= @tournament.games[6].teams[1].n %></td><td class="br"></td><td class="br"></td><td></td><td></td>
+</tr>
+<tr>
+  <td></td><td class="br"></td><td class="bb br"><%= @tournament.games[9].info %></td><td></td><td></td>
+</tr>
+<tr>
+  <td class="bb"><%= @tournament.games[1].teams[0].n %></td><td class="br"></td><td></td><td></td><td></td>
+</tr>
+<tr>
+  <td class="br"></td><td class="bb br"><%= @tournament.games[1].info %></td><td></td><td></td><td></td>
+</tr>
+<tr>
+  <td class="bb br"><%= @tournament.games[1].teams[1].n %></td><td></td><td></td><td></td><td></td>
+</tr>
+</table>
+<%= link_to 'Edit', edit_user_tournament_path(@user,@tournament) %> |
+<%= link_to 'Back', user_tournaments_path(@user) %>
+</div>

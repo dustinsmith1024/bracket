@@ -11,10 +11,11 @@ class Game < ActiveRecord::Base
     self.winner.team.n + " " + self.original_odds.to_s + " " + self.adjusted_odds.to_s
   end
 
-  def schedule_game(seeds)
+  def schedule_game(seeds, division)
     if self.participants.empty?
-      self.participants.create([:team => Team.find_by_seed(seeds[0]), :winner => false])
-      self.participants.create([:team => Team.find_by_seed(seeds[1]), :winner => false])
+# FIND BY SEED AND DIVISION
+      self.participants.create([:team => Team.find_by_seed_and_division(seeds[0],division), :winner => false])
+      self.participants.create([:team => Team.find_by_seed_and_division(seeds[1],division), :winner => false])
     end
     self.update_attributes(:status => 'Scheduled')
   end

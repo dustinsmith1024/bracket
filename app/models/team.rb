@@ -1,5 +1,5 @@
 class Team < ActiveRecord::Base
-
+  default_scope order('division, seed')
   has_and_belongs_to_many :tags
   has_many :winners, :class_name => 'Game', :foreign_key => 'winner_id'
   has_many :team_ones, :class_name => 'Game', :foreign_key => 'team_one_id'
@@ -8,6 +8,7 @@ class Team < ActiveRecord::Base
   has_many :participants
   has_many :games, :through => :participants
 #has_many :purchases, :class_name => 'Sale', :foreign_key => 'buyer_id'
+  validates_uniqueness_of :seed, :scope => :division
 
 def self.random
   self.find_by_id(rand(Team.count) + 1)
