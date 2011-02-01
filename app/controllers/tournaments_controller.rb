@@ -17,7 +17,7 @@ class TournamentsController < ApplicationController
     @user = User.find(params[:user_id])
     @tournament = Tournament.find(params[:id])
     @tags = Tag.order("kind").all
-    if @tournament.games.empty?
+    if @tournament.games.count < 66
       ##CREATE GAMES
       @tournament.build_games
     end
@@ -36,7 +36,7 @@ class TournamentsController < ApplicationController
     @tournament.clear
 
     respond_to do |format|
-      format.html { redirect_to(user_url(@tournament.user,@tournament), :notice => 'Rebuilt!') }
+      format.html { redirect_to(user_tournament_url(@tournament.user,@tournament), :notice => 'Rebuilt!') }
 #      format.html # show.html.erb
       format.xml  { render :xml => @tournament }
     end

@@ -8,6 +8,7 @@ Bracket::Application.routes.draw do
   get "pages/home"
   get "pages/info"
   get "pages/contact"
+  get "pages/table"
 
   resources :tags
   resources :teams

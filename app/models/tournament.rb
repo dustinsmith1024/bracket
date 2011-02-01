@@ -11,19 +11,30 @@ class Tournament < ActiveRecord::Base
   def build_games
   ## LOOPS ALL GAMES AND PLAYS THEM...PROLLY NEEDS A BETTER NAME
 
-   (0..65).each do |game_number|
+   (0..66).each do |game_number|
 
       division = case game_number
         when 0..15 then "East"
-        when 16..32 then "Midwest"
-        when 33..48 then "South"
-        when 49..65 then "West"
+        when 16..31 then "Midwest"
+        when 32..47 then "South"
+        when 48..63 then "West"
+        when 64..66 then "Final Four"  #WHAT TO DO HERE...
       end
+
+      division_two = nil
 
       game = self.games.find_or_create_by_number(game_number)
 
       if(game.status.nil?)
-        game.schedule_game(whos_playing(game_number),division)
+        if game_number < 64
+          game.schedule_game(whos_playing(game_number),division)
+        elsif game_number == 64
+          game.schedule_game(whos_playing(game_number),"East","South")
+        elsif game_number == 65
+          game.schedule_game(whos_playing(game_number),"Midwest","West")
+        elsif game_number == 66
+          game.schedule_game(whos_playing(game_number),self.games.find_by_number(64).winner.team.division,self.games.find_by_number(65).winner.team.division)
+        end
       end
 
       if(game.scheduled?)

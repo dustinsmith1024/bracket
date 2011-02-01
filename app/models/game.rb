@@ -7,15 +7,44 @@ class Game < ActiveRecord::Base
     self.participants.find_by_winner(true)
   end
 
-  def info
-    self.winner.team.n + " " + self.original_odds.to_s + " " + self.adjusted_odds.to_s
+  def loser
+    self.participants.find_by_winner(false)
   end
 
-  def schedule_game(seeds, division)
+  def is_upset?
+    self.loser.team.seed < self.winner.team.seed ? true : false
+  end
+
+  def is_even_matchup?
+    self.loser.team.seed == self.winner.team.seed ? true : false
+  end
+
+  def odds_adjusted?
+    self.adjusted_odds == self.original_odds ? true : false
+  end
+
+  def is_user_assisted_win?
+    ((self.is_upset? || self.is_even_matchup?) && (self.adjusted_odds <  self.original_odds)) ? true : false
+  end
+
+  def info
+    if self.is_user_assisted_win?
+      self.winner.team.n + " " + self.original_odds.to_s + " " + self.adjusted_odds.to_s + "!!"
+    else
+      self.winner.team.n
+    end
+  end
+
+  def schedule_game(seeds, division, division_two = nil)
     if self.participants.empty?
 # FIND BY SEED AND DIVISION
-      self.participants.create([:team => Team.find_by_seed_and_division(seeds[0],division), :winner => false])
-      self.participants.create([:team => Team.find_by_seed_and_division(seeds[1],division), :winner => false])
+      if division_two.nil?
+        self.participants.create([:team => Team.find_by_seed_and_division(seeds[0],division), :winner => false])
+        self.participants.create([:team => Team.find_by_seed_and_division(seeds[1],division), :winner => false])
+      else
+        self.participants.create([:team => Team.find_by_seed_and_division(seeds[0],division), :winner => false])
+        self.participants.create([:team => Team.find_by_seed_and_division(seeds[1],division_two), :winner => false])  
+      end
     end
     self.update_attributes(:status => 'Scheduled')
   end
@@ -35,15 +64,14 @@ class Game < ActiveRecord::Base
 
   def play_game
   unless(self.participants.empty?)
-    teams = self.teams.order("seed")  ## NEED HIGH SEED FIRST -> SHOULD ALREADY BUIT JUST IN CASE
+    teams = self.teams.sort_by(&:seed)  ## NEED HIGH SEED FIRST -> SHOULD ALREADY BUIT JUST IN CASE
     user = self.tournament.user
-logger.info("Teams: " + teams[0].n + " " + teams[1].n)
+    logger.info("Teams: " + teams[0].n + " " + teams[1].n)
     up, over = 0, 0;
     ## GRAB USER TEAM
     user_team = user.team
-    ## GRAB USER TAGS
-## NEEDS TO CHANGE TO BRACKET TAGS!!!!! THEN YOU CAN HAVE MULTIPLE ANSWERS FOR DIFF BRACKETS
-    #user_tags = user.tags 
+    ## GRAB TOURNAMENT TAGS
+    #user_tags = user.tags  ## USED TO USE USER TAGES, FIGURED IT'D BE BETTER TO DO THIS ON THE TOURNAMENT FOR MORE OPTIONS
     tournament_tags = self.tournament.tags.collect {|t| t.name}
     team_tags = user_team.tags.collect {|t| t.name}  ##METHOD THIS
     logger.info("Tourney tags: " + tournament_tags.to_s)
