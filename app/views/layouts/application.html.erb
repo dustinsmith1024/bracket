@@ -2,8 +2,15 @@
 <html>
 <head>
   <title>Bracket</title>
-  <%= stylesheet_link_tag :all %>
-  <%= javascript_include_tag :all %>
+  <%= stylesheet_link_tag 'scaffold','bracket' %>
+  <script src="https://www.google.com/jsapi?key=ABQIAAAAIV5Obu0VdsAWmIPelbWXbRQ3xZ8itk8Qm3mo0bDOTeoyembSNRTBtfAlB6PeVGGwEZhDMnMjdVQeuQ" type="text/javascript"></script>
+  <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.2/themes/dark-hive/jquery-ui.css" type="text/css" rel="Stylesheet" />
+  <script language="Javascript" type="text/javascript">
+    google.load("jquery", "1.4.4");
+    google.load("jqueryui", "1.8.9");
+    google.setOnLoadCallback;
+  </script>
+  <%= javascript_include_tag 'application','rails.js','pages' %>
   <%= csrf_meta_tag %>
 </head>
 <body>
@@ -13,23 +20,37 @@
 <li><%= link_to "Home", pages_home_path %></li>
 <li>>></li>
 <li><%= link_to "Contact", pages_contact_path %></li>
-<li>>></li>
-<li><%= link_to "About", pages_info_path %></li>
-<% unless @user.nil? %>
-<li>>></li>
-<li><%= link_to "My Brackets", user_path(@user) %></li>
+<% if user_signed_in? %>
+  <li>>></li>
+  <li><%= link_to "My Brackets", user_tournaments_path(current_user) %></li>
 <% end %>
+<%# NEED USER ADMIN HERE %>
+<% if current_user %>
+<% if current_user.email == "dustinsmith1024@hotmail.com" %>
 <li>>></li>
 <li><%= link_to "Tags", tags_path %></li>
 <li>>></li>
 <li><%= link_to "Teams", teams_path %></li>
-<li>>></li>
-<li><%= link_to "Users", users_path %></li>
+<% end %>
+<% end %>
+<% if user_signed_in? %>
+  <li>>></li>
+  <li><%= link_to "Sign Out", destroy_user_session_path() %></li>
+<% else %>
+  <li>>></li>
+  <li><%= link_to "Sign In", new_user_session_path() %></li>
+  <li>>></li>
+  <li><%= link_to "Sign Up", new_user_registration_path() %></li>
+<% end %>
+
 <li> </li>
 </ul>
 <br />
 </div>
 <div class="main-content">
+<div id="popup"></div>
+<p class="notice"><%= notice %></p>
+<p class="alert"><%= alert %></p>
 <%= yield %>
 </div>
 </body>

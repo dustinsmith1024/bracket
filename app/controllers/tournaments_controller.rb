@@ -1,4 +1,6 @@
 class TournamentsController < ApplicationController
+  before_filter :authenticate_user!, :except => [:show]
+
   # GET /tournaments
   # GET /tournaments.xml
   def index
@@ -8,6 +10,7 @@ class TournamentsController < ApplicationController
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @tournaments }
+      format.js   { render :layout => false }
     end
   end
 
@@ -27,6 +30,7 @@ class TournamentsController < ApplicationController
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @tournament }
+      format.js   { render :layout => false }
     end
   end
 

@@ -1,13 +1,13 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <b>Email/Name:</b>
-  <%= @user.email %>
+  <b>Name:</b>
+  <%= @user.name %>
 </p>
 
 <p>
   <b>Team:</b>
-  <%= @user.team.name if @user.team %>
+  <%= @user.team.name %>
 </p>
 <h2>Tournaments:</h2>
 <% @tournaments.each do |tournament| %>

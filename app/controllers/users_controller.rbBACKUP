@@ -1,5 +1,4 @@
 class UsersController < ApplicationController
-  before_filter :authenticate_user!
   # GET /users
   # GET /users.xml
   def index
@@ -37,7 +36,7 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.xml
   def show
-    @user = current_user
+    @user = User.find(params[:id])
     @tournaments = @user.tournaments
     @tags = Tag.all
     respond_to do |format|

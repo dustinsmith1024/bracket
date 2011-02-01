@@ -1,4 +1,6 @@
 Bracket::Application.routes.draw do
+  devise_for :users
+
 #  resources :participants
 
   #resources :games
@@ -15,6 +17,11 @@ Bracket::Application.routes.draw do
   resources :users do
     resources :tournaments
   end
+
+  namespace :user do
+    root :to => "users#show"
+  end
+
   match 'teams/:id/add/:tag_id' => 'teams#add_tag', :as => :add_tag, :via => :post
   match 'users/:id/add/:tag_id' => 'users#add_tag', :as => :add_user_tag, :via => :post
   match 'tournaments/:id/add/:tag_id' => 'tournaments#add_tag', :as => :add_tournament_tag, :via => :post

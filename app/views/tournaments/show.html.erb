@@ -1,39 +1,20 @@
-<div class="light">
 <p id="notice"><%= notice %></p>
 
-<p>
-  <b>Name:</b>
-  <%= @tournament.name %>
-</p>
-
-<p>
-  <b>Title:</b>
-  <%= @tournament.title %>
-</p>
-<p>
-  <b>User:</b>
-  <%= @tournament.user.name unless @tournament.user.nil?%>
-</p>
-<p>
-  <b>Content:</b>
-  <%= @tournament.content %>
-</p>
-
-<p>
-  <b>My Team:</b>
-  <%= @tournament.user.team.name + " " + @tournament.user.team.mascot unless @tournament.user.nil?%>
-</p>
-
-<h2>Tags Used:</h2>
-<% @tournament.tags.each do |tag| %>
-  <%= tag.name %> <br/>
+<div class="bracket-title">
+<b>Bracket Name:</b> 
+<% if current_user == @user %>
+<%= link_to @tournament.title, edit_user_tournament_path(@user,@tournament) %>
+<% else %>
+<%= @tournament.title %>
 <% end %>
-<br/>
-
-<%= link_to 'Redo!', tournament_redo_url(@tournament), :method => 'post' %>
-<%#MIDWES $%><%#EAST $%>
-<%#WEST $%><%#SOUTH $%>
-<table>
+<% if current_user == @user %>
+| <%= link_to 'Rebuild Bracket', tournament_redo_url(@tournament), :method => 'post' if current_user == @user %>
+<% end %>
+<br/><br/>
+<b><%= @tournament.user.email %></b> likes the <%= @tournament.user.team.name + " " + @tournament.user.team.mascot %> and <%= @tournament.tags.collect{|t| t.name }.to_sentence %><%# CHANGE TO NAME LATER %>
+</div>
+<div class="bracket-container">
+<table class="bracket">
 <tr>
   <td class="bb"><%= @tournament.games[17].teams[0].n %></td><td></td><td></td><td></td><td></td><td></td><td></td></td><td></td><td></td><td></td><td></td><td></td><td class="bb"><%= @tournament.games[1].teams[0].n %></td>
 </tr>
@@ -80,7 +61,7 @@
   <td class="bb br"><%= @tournament.games[20].teams[1].n %></td><td></td><td></td><td class="br"></td><td></td><td></td><td></td><td></td><td></td><td class="bl"></td><td></td><td></td><td class="bb bl"><%= @tournament.games[4].teams[1].n %></td>
 </tr>
 <tr>
-  <td class=""></td><td></td><td><strong>MIDWEST</strong></td><td class="br"></td><td class="bb"><%= @tournament.games[31].info %></td><td></td><td></td><td></td><td class="bb"><%= @tournament.games[15].info %></td><td class="bl"></td><td class="division"><strong>EAST</strong></td><td></td><td class=""></td>
+  <td class=""></td><td></td><td class="division br" COLSPAN="2"><div class="division left">MIDWEST</div></td><td class="bb"><%= @tournament.games[31].info %></td><td></td><td></td><td></td><td class="bb"><%= @tournament.games[15].info %></td><td class="bl" COLSPAN="2"><div class="division right">EAST</div></td><td></td><td class=""></td>
 </tr>
 <tr>
   <td class="bb"><%= @tournament.games[22].teams[0].n %></td><td></td><td></td><td class="br"></td><td class="br"></td><td></td><td></td><td></td><td class="bl"></td><td class="bl"></td><td></td><td></td><td class="bb"><%= @tournament.games[6].teams[0].n %></td>
@@ -179,7 +160,7 @@
   <td class="bb br"><%= @tournament.games[52].teams[1].n %></td><td></td><td></td><td class="br"></td><td class="br"></td><td></td><td></td><td></td><td class="bl"></td><td class="bl"></td><td></td><td></td><td class="bb bl"><%= @tournament.games[36].teams[1].n %></td>
 </tr>
 <tr>
-  <td class=""></td><td></td><td class="division"><strong>WEST</strong></td><td class="br"></td><td class="bb br"><%= @tournament.games[63].info %></td><td></td><td></td><td></td><td class="bb bl"><%= @tournament.games[47].info %></td><td class="bl"></td><td class="division"><strong>SOUTH</strong></td><td></td><td class=""></td>
+  <td class=""></td><td></td><td class="division br" COLSPAN="2"><div class="division left">WEST</div><td class="bb br"><%= @tournament.games[63].info %></td><td></td><td></td><td></td><td class="bb bl"><%= @tournament.games[47].info %></td><td class="bl" COLSPAN="2"><div class="division right">SOUTH</div></td><td></td><td class=""></td>
 </tr>
 
 <tr>
@@ -229,6 +210,4 @@
 </tr>
 
 </table>
-<%= link_to 'Edit', edit_user_tournament_path(@user,@tournament) %> |
-<%= link_to 'Back', user_tournaments_path(@user) %>
 </div>
