@@ -4,7 +4,8 @@
   <title>Bracket</title>
   <%= stylesheet_link_tag 'scaffold','bracket' %>
   <script src="https://www.google.com/jsapi?key=ABQIAAAAIV5Obu0VdsAWmIPelbWXbRQ3xZ8itk8Qm3mo0bDOTeoyembSNRTBtfAlB6PeVGGwEZhDMnMjdVQeuQ" type="text/javascript"></script>
-  <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.2/themes/dark-hive/jquery-ui.css" type="text/css" rel="Stylesheet" />
+  <%#<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.2/themes/dark-hive/jquery-ui.css" type="text/css" rel="Stylesheet" />%>
+  <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.2/themes/excite-bike/jquery-ui.css" type="text/css" rel="Stylesheet" />
   <script language="Javascript" type="text/javascript">
     google.load("jquery", "1.4.4");
     google.load("jqueryui", "1.8.9");
@@ -17,20 +18,20 @@
 <div class="header">
 <ul>
 <li>Links: </li>
-<li><%= link_to "Home", pages_home_path %></li>
+<li><%= link_to "Home", pages_home_path, :class => "ajax" %></li>
 <li>>></li>
-<li><%= link_to "Contact", pages_contact_path %></li>
+<li><%= link_to "Contact", pages_contact_path, :class => "ajax" %></li>
 <% if user_signed_in? %>
   <li>>></li>
-  <li><%= link_to "My Brackets", user_tournaments_path(current_user) %></li>
+  <li><%= link_to "My Brackets", user_tournaments_path(current_user), :class => "ajax" %></li>
 <% end %>
 <%# NEED USER ADMIN HERE %>
 <% if current_user %>
 <% if current_user.email == "dustinsmith1024@hotmail.com" %>
 <li>>></li>
-<li><%= link_to "Tags", tags_path %></li>
+<li><%= link_to "Tags", tags_path, :class => "ajax" %></li>
 <li>>></li>
-<li><%= link_to "Teams", teams_path %></li>
+<li><%= link_to "Teams", teams_path, :class => "ajax" %></li>
 <% end %>
 <% end %>
 <% if user_signed_in? %>
@@ -38,9 +39,9 @@
   <li><%= link_to "Sign Out", destroy_user_session_path() %></li>
 <% else %>
   <li>>></li>
-  <li><%= link_to "Sign In", new_user_session_path() %></li>
+  <li><%= link_to "Sign In", new_user_session_path(), :class => "ajax" %></li>
   <li>>></li>
-  <li><%= link_to "Sign Up", new_user_registration_path() %></li>
+  <li><%= link_to "Sign Up", new_user_registration_path(), :class => "ajax" %></li>
 <% end %>
 
 <li> </li>

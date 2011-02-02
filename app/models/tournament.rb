@@ -8,6 +8,14 @@ class Tournament < ActiveRecord::Base
     Game.destroy self.games
   end
 
+  def tag_by_kind(kind)
+    if self.tags.empty?
+      nil
+    else
+      self.tags.find_by_kind(kind).id
+    end
+  end
+
   def build_games
   ## LOOPS ALL GAMES AND PLAYS THEM...PROLLY NEEDS A BETTER NAME
 

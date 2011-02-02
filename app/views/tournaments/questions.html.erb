@@ -1,24 +1,29 @@
-<h3>Tweak these to be questions, then add tags based on answers....</h3><br/>
+<h3>Build your bracket by answering a filling out this profile.</h3><br/>
 
-<%= link_to 'User Home', user_path(@tournament.user) %><br/><br/>
+<div class="questions">
 
-What's your favorite animal? <%= collection_select(:tournament, :tags, Tag.find_all_by_kind("Animal"), :id, :name) %>
-<br/>
-What's your favorite color?  <%= collection_select(:tournament, :tags, Tag.find_all_by_kind("Color"), :id, :name) %>
-<br/>
-What's your favorite conference?  <%= collection_select(:tournament, :tags, Tag.find_all_by_kind("Conference"), :id, :name) %>
-<br/>
-God or the Devil?  <%= collection_select(:tournament, :tags, Tag.find_all_by_kind("Deity"), :id, :name) %>
-<br/>
-Cowboys or Indians...or Kings??  <%= collection_select(:tournament, :tags, Tag.find_all_by_kind("Person"), :id, :name) %>
+<form id="questions-form" class="edit-questions" method="post" action="<%= tournament_questions_path(@tournament) %>" data-remote="true" >
+<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token%>" />
+Hi my name is <%= @user.name %>.  
+My favorite team is the <%= @user.team.name + " " + @user.team.mascot %>.
+The best state in the US is <%= select(:tag, :state, Tag.find_all_by_kind("State").collect{|t| [ t.name,t.id]}, :selected => @tournament.tag_by_kind("State")) %>. 
+I think a 
+<%= select(:tag, :animal, Tag.find_all_by_kind("Animal").collect{|t| [ t.name,t.id]}, :selected => @tournament.tag_by_kind("Animal")) %> would win in a fight of all animals!
+My favorite color is <%= select(:tag, :color, Tag.find_all_by_kind("Color").collect{|t| [ t.name,t.id]}, :selected => @tournament.tag_by_kind("Color")) %>.
+The best basketball conference in America is the <%= select(:tag, :conference, Tag.find_all_by_kind("Conference").collect{|t| [ t.name,t.id]}, :selected => @tournament.tag_by_kind("Conference")) %>.
+I believe in <%= select(:tag, :diety, Tag.find_all_by_kind("Deity").collect{|t| [ t.name,t.id]}, :selected => @tournament.tag_by_kind("Deity")) %>.
+Yeehaw! I want to be a <%= select(:tag, :person, Tag.find_all_by_kind("Person").collect{|t| [ t.name,t.id]}, :selected => @tournament.tag_by_kind("Person")) %>.
+<br/><input type="submit">
+</form>
+</div>
 <br/>
 <h2>Current Tags:</h2>
 <% @tournament.tags.each do |tag| %>
-  <%= tag.name %> - <%= link_to 'Remove', remove_tournament_tag_path(@tournament,tag), :method => :post %><br/>
+  <%= tag.name %> - <%= link_to 'Remove', remove_tournament_tag_path(@tournament,tag), :method => :post, :remote => "true" %><br/>
 <% end %>
 
 <h2>Available Tags:</h2>
 <% @tags.each do |tag| %>
-  <%= link_to tag.name, add_tournament_tag_path(@tournament,tag), :method => :post %><br/>
+  <%= link_to tag.name, add_tournament_tag_path(@tournament,tag), :method => :post, :remote => "true" %><br/>
 <% end %>
 

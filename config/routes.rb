@@ -19,7 +19,7 @@ Bracket::Application.routes.draw do
   end
 
   namespace :user do
-    root :to => "users#show"
+    root :to => "pages#table"
   end
 
   match 'teams/:id/add/:tag_id' => 'teams#add_tag', :as => :add_tag, :via => :post
@@ -29,9 +29,10 @@ Bracket::Application.routes.draw do
   match 'users/:id/remove/:tag_id' => 'users#remove_tag', :as => :remove_user_tag, :via => :post
   match 'tournaments/:id/remove/:tag_id' => 'tournaments#remove_tag', :as => :remove_tournament_tag, :via => :post
   match 'tournaments/:id/questions' => 'tournaments#questions', :as => :tournament_questions, :via => :get
+  match 'tournaments/:id/questions' => 'tournaments#update_questions', :as => :tournament_questions, :via => :post
   match 'tournaments/:id/redo' => 'tournaments#redo', :as => :tournament_redo, :via => :post
 
-  root :to => "pages#home"
+  root :to => "pages#table"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

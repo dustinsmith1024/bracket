@@ -10,23 +10,21 @@
   <b>Team:</b>
   <%= @user.team.name if @user.team %>
 </p>
-<br/><%= link_to 'New Tournament', new_user_tournament_path(@user) %><br/>
+<br/><%= link_to 'New Tournament', new_user_tournament_path(@user), :class => "ajax" %><br/>
 <h2>Tournaments:</h2>
 <% @tournaments.each do |tournament| %>
   <%= tournament.name %>:
-  <%= link_to 'Questions/Tags', tournament_questions_path(tournament) %>
+  <%= link_to 'Questions/Tags', tournament_questions_path(tournament), :class => "ajax" %>
   <% if tournament.tags.empty? %>
     Create Tags Before you can view...
   <% elsif tournament.games.empty? %>
-    <%= link_to "Build", user_tournament_path(@user,tournament) %>
+    <%= link_to "Build", user_tournament_path(@user,tournament), :class => "ajax" %>
   <% else %>
-    <%= link_to "View", user_tournament_path(@user,tournament) %>
+    <%= link_to "View", user_tournament_path(@user,tournament), :class => "ajax-close" %>
   <% end %>
 <br/>
 <% end %>
-<br/><%= link_to 'New Tournament', new_user_tournament_path(@user) %><br/>
+<br/><%= link_to 'New Tournament', new_user_tournament_path(@user), :class => "ajax" %><br/>
 <br/>
 
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
-
+<%= link_to 'Edit My Info', edit_user_path(@user), :class => "ajax" %>

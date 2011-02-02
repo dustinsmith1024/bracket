@@ -12,28 +12,6 @@ class UsersController < ApplicationController
     end
   end
 
-  def add_tag
-    @user = User.find(params[:id])
-    @tag = Tag.find(params[:tag_id])
-
-    @user.tags << @tag
-    respond_to do |format|
-        format.html { redirect_to(user_url(@user), :notice => 'Tag was successfully created.') }
-    end
-  end
-
-  def remove_tag
-    @user = User.find(params[:id])
-    @tag = @user.tags.find(params[:tag_id])
-    respond_to do |format|
-      if @user.tags.delete(@tag)
-        format.html { redirect_to(user_url(@user), :notice => 'Tag was successfully deleted.') }
-      else
-        format.html { redirect_to(user_url(@user), :notice => 'Tag was not deleted!.') }
-      end
-    end
-  end
-
   # GET /users/1
   # GET /users/1.xml
   def show
@@ -47,36 +25,16 @@ class UsersController < ApplicationController
     end
   end
 
-  # GET /users/new
-  # GET /users/new.xml
-  def new
-    @user = User.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.xml  { render :xml => @user }
-    end
-  end
-
   # GET /users/1/edit
   def edit
     @user = User.find(params[:id])
-  end
-
-  # POST /users
-  # POST /users.xml
-  def create
-    @user = User.new(params[:user])
 
     respond_to do |format|
-      if @user.save
-        format.html { redirect_to(@user, :notice => 'User was successfully created.') }
-        format.xml  { render :xml => @user, :status => :created, :location => @user }
-      else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @user.errors, :status => :unprocessable_entity }
-      end
+      format.html # new.html.erb
+      format.xml  { render :xml => @tournament }
+      format.js { render :layout => false }
     end
+
   end
 
   # PUT /users/1
@@ -86,24 +44,11 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.update_attributes(params[:user])
-        format.html { redirect_to(@user, :notice => 'User was successfully updated.') }
-        format.xml  { head :ok }
+        format.html { redirect_to(pages_table_path(), :notice => 'User was successfully updated.') }
       else
         format.html { render :action => "edit" }
-        format.xml  { render :xml => @user.errors, :status => :unprocessable_entity }
       end
     end
   end
 
-  # DELETE /users/1
-  # DELETE /users/1.xml
-  def destroy
-    @user = User.find(params[:id])
-    @user.destroy
-
-    respond_to do |format|
-      format.html { redirect_to(users_url) }
-      format.xml  { head :ok }
-    end
-  end
 end

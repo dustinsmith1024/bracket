@@ -9,7 +9,6 @@ class TournamentsController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.xml  { render :xml => @tournaments }
       format.js   { render :layout => false }
     end
   end
@@ -29,7 +28,6 @@ class TournamentsController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.xml  { render :xml => @tournament }
       format.js   { render :layout => false }
     end
   end
@@ -41,8 +39,7 @@ class TournamentsController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to(user_tournament_url(@tournament.user,@tournament), :notice => 'Rebuilt!') }
-#      format.html # show.html.erb
-      format.xml  { render :xml => @tournament }
+      format.js { render :layout => false }
     end
   end
 
@@ -54,7 +51,27 @@ class TournamentsController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.xml  { render :xml => @tournament }
+      format.js { render :layout => false }
+    end
+  end
+
+  def update_questions
+    @tournament = Tournament.find(params[:id])
+
+#    params[:tag].each do |tag|
+#    @tournament.tags.destroy_all
+    @tournament.tags.delete_all
+    @tournament.tags << Tag.find(params[:tag][:animal])
+    @tournament.tags << Tag.find(params[:tag][:state])
+    @tournament.tags << Tag.find(params[:tag][:color])
+    @tournament.tags << Tag.find(params[:tag][:diety])
+    @tournament.tags << Tag.find(params[:tag][:conference])
+    @tournament.tags << Tag.find(params[:tag][:person])
+
+    respond_to do |format|
+      flash[:notice] = 'Questions successfully updated.'
+      format.html { redirect_to(tournament_questions_url(@tournament)) }
+      format.js
     end
   end
 
@@ -64,7 +81,9 @@ class TournamentsController < ApplicationController
 
     @tournament.tags << @tag
     respond_to do |format|
-        format.html { redirect_to(tournament_questions_url(@tournament), :notice => 'Tag was successfully created.') }
+      flash[:notice] = 'Tag was successfully created.'
+      format.html { redirect_to(tournament_questions_url(@tournament)) }
+      format.js
     end
   end
 
@@ -74,8 +93,10 @@ class TournamentsController < ApplicationController
     respond_to do |format|
       if @tournament.tags.delete(@tag)
         format.html { redirect_to(tournament_questions_url(@tournament), :notice => 'Tag was successfully deleted.') }
+        format.js
       else
         format.html { redirect_to(tournament_questions_url(@tournament), :notice => 'Tag was NOT deleted.') }
+        format.js
       end
     end
   end
@@ -88,7 +109,7 @@ class TournamentsController < ApplicationController
 
     respond_to do |format|
       format.html # new.html.erb
-      format.xml  { render :xml => @tournament }
+      format.js { render :layout => false }
     end
   end
 
@@ -96,6 +117,11 @@ class TournamentsController < ApplicationController
   def edit
     @user = User.find(params[:user_id])
     @tournament = Tournament.find(params[:id])
+
+    respond_to do |format|
+      format.html # new.html.erb
+      format.js { render :layout => false }
+    end
   end
 
   # POST /tournaments
@@ -122,10 +148,8 @@ class TournamentsController < ApplicationController
     respond_to do |format|
       if @tournament.update_attributes(params[:tournament])
         format.html { redirect_to(user_path(@user), :notice => 'Tournament was successfully updated.') }
-        format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
-        format.xml  { render :xml => @tournament.errors, :status => :unprocessable_entity }
       end
     end
   end
@@ -139,7 +163,6 @@ class TournamentsController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to(user_url(@user)) }
-      format.xml  { head :ok }
     end
   end
 end

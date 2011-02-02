@@ -101,3 +101,7 @@ div.bracket-title{
   padding-bottom: 10px;
   padding-left: 9px;
 }
+div.questions {
+  font-size: 1.2em;
+  line-height: 175%;
+}
