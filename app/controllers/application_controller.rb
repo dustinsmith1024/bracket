@@ -6,6 +6,6 @@ class ApplicationController < ActionController::Base
   protected
 
   def layout_by_resource
-    is_a?(Devise::SessionsController) ? false : "application"
+    (is_a?(Devise::SessionsController)) || (is_a?(Devise::RegistrationsController)) ? false : "application"
   end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110201172719) do
+ActiveRecord::Schema.define(:version => 20110202204610) do
 
   create_table "games", :force => true do |t|
     t.integer  "number"
@@ -45,6 +45,7 @@ ActiveRecord::Schema.define(:version => 20110201172719) do
     t.string   "kind"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "plural_name"
   end
 
   add_index "tags", ["name", "kind"], :name => "by_name_and_kind", :unique => true
@@ -78,6 +79,7 @@ ActiveRecord::Schema.define(:version => 20110201172719) do
     t.integer  "seed"
     t.integer  "division_seed"
     t.string   "division"
+    t.string   "short_name"
   end
 
   create_table "tournaments", :force => true do |t|

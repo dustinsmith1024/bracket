@@ -33,6 +33,10 @@ li a {
   padding: 7px;
 
 }
+
+li.account {
+  float: right;
+}
 .dark {
   background-color: gray;
 }

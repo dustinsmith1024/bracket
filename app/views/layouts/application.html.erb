@@ -17,7 +17,7 @@
 <body>
 <div class="header">
 <ul>
-<li>Links: </li>
+<li><b>Links: </b></li>
 <li><%= link_to "Home", pages_home_path, :class => "ajax" %></li>
 <li>>></li>
 <li><%= link_to "Contact", pages_contact_path, :class => "ajax" %></li>
@@ -35,14 +35,14 @@
 <% end %>
 <% end %>
 <% if user_signed_in? %>
-  <li>>></li>
-  <li><%= link_to "Sign Out", destroy_user_session_path() %></li>
+  <li class="account"><%= link_to "Sign Out", destroy_user_session_path() %></li>
 <% else %>
-  <li>>></li>
-  <li><%= link_to "Sign In", new_user_session_path(), :class => "ajax" %></li>
-  <li>>></li>
-  <li><%= link_to "Sign Up", new_user_registration_path(), :class => "ajax" %></li>
+  <li class="account"><%= link_to "Sign In", new_user_session_path(), :class => "ajax" %></li>
+  <li class="account">>></li>
+  <li class="account"><%= link_to "Sign Up", new_user_registration_path(), :class => "ajax" %></li>
 <% end %>
+  <li class="account"> >> </li>
+  <li class="account"><b> Account Options: </b>&nbsp;</li>
 
 <li> </li>
 </ul>

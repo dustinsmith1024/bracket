@@ -5,6 +5,7 @@
 <table>
   <tr>
     <th>Name</th>
+    <th>Plural</th>
     <th>Kind</th>
     <th></th>
     <th></th>
@@ -14,6 +15,7 @@
 <% @tags.each do |tag| %>
   <tr>
     <td><%= tag.name %></td>
+    <td><%= tag.plural_name %></td>
     <td><%= tag.kind %></td>
     <td><%= link_to 'Show', tag %></td>
     <td><%= link_to 'Edit', edit_tag_path(tag) %></td>

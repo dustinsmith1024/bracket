@@ -155,7 +155,11 @@ logger.info("OVER: " + over.to_s + " UP: " + up.to_s)
 end
 
   def n
-    return self.seed.to_s + ". " + self.name.to_s
+    if self.short_name.nil?
+      return self.seed.to_s + ". " + self.name.to_s
+    else
+      return self.seed.to_s + ". " + self.short_name.to_s
+    end
   end
 
   def self.ods(chance=0)

@@ -11,7 +11,7 @@
 | <%= link_to 'Rebuild Bracket', tournament_redo_url(@tournament), :method => 'post' if current_user == @user %>
 <% end %>
 <br/><br/>
-<b><%= @tournament.user.email %></b> likes the <%= @tournament.user.team.name + " " + @tournament.user.team.mascot %> and <%= @tournament.tags.collect{|t| t.name }.to_sentence %><%# CHANGE TO NAME LATER %>
+<b><%= @tournament.user.email %></b> likes the <%= @tournament.user.team.name + " " + @tournament.user.team.mascot %> and <%= @tournament.tags.collect{|t| t.name.pluralize }.to_sentence %><%# CHANGE TO NAME LATER %>
 </div>
 <div class="bracket-container">
 <table class="bracket">
@@ -100,7 +100,7 @@
   <td></td><td class="br"></td><td class="bb br"><%= @tournament.games[26].info %></td><td></td><td class="br"></td><td></td><td></td><td></td><td class="bl"></td><td></td><td class="bb bl"><%= @tournament.games[10].info %></td><td class="bl"></td><td></td>
 </tr>
 <tr>
-  <td class="bb"><%= @tournament.games[18].teams[0].n %></td><td class="br"></td><td></td><td></td><td class="br"></td><td></td><td class="bl bb br bt <%= "upset" if @tournament.games[66].is_user_assisted_win?  %>"><%= @tournament.games[66].info %></td><td></td><td class="bl"></td><td></td><td></td><td class="bl"></td><td class="bb"><%= @tournament.games[2].teams[0].n %></td>
+  <td class="bb"><%= @tournament.games[18].teams[0].n %></td><td class="br"></td><td></td><td></td><td class="br"></td><td></td><td class="bl bb br bt <%#= "upset" if @tournament.games[66].is_user_assisted_win?  %>"><%= @tournament.games[66].info %></td><td></td><td class="bl"></td><td></td><td></td><td class="bl"></td><td class="bb"><%= @tournament.games[2].teams[0].n %></td>
 </tr>
 <tr>
   <td class="br"></td><td class="bb br"><%= @tournament.games[18].info %></td><td></td><td></td><td class="br"></td><td></td><td class="bl"></td><td class="bl"></td><td class="bl"></td><td></td><td></td><td class="bb bl"><%= @tournament.games[2].info %></td><td class="bl"></td>
@@ -110,7 +110,7 @@
 </tr>
 
 <tr>
-  <td class=""></td><td></td><td></td><td></td><td class="br"></td><td class="bb"><%= @tournament.games[65].info %></td><td class="bl"></td><td class="bl bb <%= "upset" if @tournament.games[64].is_user_assisted_win?  %>"><%= @tournament.games[64].info %></td><td class="bl"></td><td></td><td></td><td></td><td class=""></td>
+  <td class=""></td><td></td><td></td><td></td><td class="br"></td><td class="bb"><%= @tournament.games[65].info %></td><td class="bl"></td><td class="bl bb <%#= "upset" if @tournament.games[64].is_user_assisted_win?  %>"><%= @tournament.games[64].info %></td><td class="bl"></td><td></td><td></td><td></td><td class=""></td>
 </tr>
 
 
