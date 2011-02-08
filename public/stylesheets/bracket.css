@@ -1,3 +1,9 @@
+img.center {
+  left: 39%;
+  top: 30%;
+  position: absolute;
+}
+
 #popup2 {
   position: fixed;
   left: 5%;
@@ -31,12 +37,16 @@ li {
 
 li a {
   padding: 7px;
-
+  border: 1px solid gray;
+  margin: 5px;
 }
 
 li.account {
   float: right;
+  position: relative;
+  right: 20px;
 }
+
 .dark {
   background-color: gray;
 }

@@ -1,10 +1,8 @@
 Bracket::Application.routes.draw do
   devise_for :users
 
-#  resources :participants
-
+  #resources :participants
   #resources :games
-
   #resources :users
 
   get "pages/home"
@@ -19,7 +17,7 @@ Bracket::Application.routes.draw do
   end
 
   namespace :user do
-    root :to => "pages#table"
+    root :to => "pages#ncaa"
   end
 
   match 'teams/:id/add/:tag_id' => 'teams#add_tag', :as => :add_tag, :via => :post
@@ -32,7 +30,7 @@ Bracket::Application.routes.draw do
   match 'tournaments/:id/questions' => 'tournaments#update_questions', :as => :tournament_questions, :via => :post
   match 'tournaments/:id/redo' => 'tournaments#redo', :as => :tournament_redo, :via => :post
 
-  root :to => "pages#table"
+  root :to => "pages#ncaa"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
