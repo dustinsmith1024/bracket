@@ -27,11 +27,10 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
-    @user = User.find(params[:id])
+    @user = current_user
 
     respond_to do |format|
       format.html # new.html.erb
-      format.xml  { render :xml => @tournament }
       format.js { render :layout => false }
     end
 
@@ -40,10 +39,13 @@ class UsersController < ApplicationController
   # PUT /users/1
   # PUT /users/1.xml
   def update
-    @user = User.find(params[:id])
+#    @user = User.find(params[:id])
+
+    current_user.team = Team.find(params[:user][:team_id])
+    current_user.team.save!
 
     respond_to do |format|
-      if @user.update_attributes(params[:user])
+      if current_user.update_attributes(params[:user])
         format.html { redirect_to(pages_table_path(), :notice => 'User was successfully updated.') }
       else
         format.html { render :action => "edit" }
