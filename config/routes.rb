@@ -16,9 +16,10 @@ Bracket::Application.routes.draw do
     resources :tournaments
   end
 
-  namespace :user do
-    root :to => "pages#ncaa"
-  end
+  #namespace :user do
+  #  root :to => "pages#ncaa"
+  #end
+  match '/' => 'pages#ncaa', :as => 'user_root'
 
   match 'teams/:id/add/:tag_id' => 'teams#add_tag', :as => :add_tag, :via => :post
   match 'users/:id/add/:tag_id' => 'users#add_tag', :as => :add_user_tag, :via => :post
