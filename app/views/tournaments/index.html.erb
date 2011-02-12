@@ -22,7 +22,13 @@
 </tr>
 <% end %>
 </table>
-<br/><%= link_to 'New Tournament', new_user_tournament_url(@user), :class => "ajax" %><br/>
+<br/>
+<% if @user.name.nil? %>
+<%= link_to 'Edit User Info First!', edit_user_url(@user), :class => "ajax" %>
+<% else %>
+<%= link_to 'New Tournament', new_user_tournament_url(@user), :class => "ajax" %>
+<% end %>
+<br/>
 <br/>
 
 <%#= link_to 'Edit My Info', edit_user_url(@user), :class => "ajax" %>
