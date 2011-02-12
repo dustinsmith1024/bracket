@@ -1,1 +1,2 @@
-$("#popup").load("<%= tournament_questions_path(@tournament, :format => 'js') %>").dialog();
+$("#popup > .popup-header > div.title").html("My Brackets");
+$("#popup > p.body").load("<%= user_tournaments_path(current_user, :format => 'js') %>");

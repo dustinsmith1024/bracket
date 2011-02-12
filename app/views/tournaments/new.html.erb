@@ -1,5 +1,7 @@
-<h1>New tournament</h1>
+<h1>Step 1. New tournament</h1>
 
 <%= render 'form' %>
 
-<%= link_to 'Back', user_path(@user) %>
+<%= link_to 'Back', user_tournaments_path(@user), :class => 'ajax' %>
+
+<%#= link_to 'Back', user_path(@user) %>

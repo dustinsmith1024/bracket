@@ -11,7 +11,9 @@ $("a.ajax").live("click",function(event){
     url: url + "?format=js", type: 'get', dataType: 'html',
     success: function(data, status, xhr){
 //      $("#popup").html(data).dialog({ width: 750, height: 550, maxHeight: 600, title: title });
+      $("#popup > .popup-header > div.title").html(title);
       $("#popup > p.body").html(data).parent().show();
+
     }
   });
 });

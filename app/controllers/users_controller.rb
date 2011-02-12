@@ -46,7 +46,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if current_user.update_attributes(params[:user])
-        format.html { redirect_to(pages_table_path(), :notice => 'User was successfully updated.') }
+        format.html { redirect_to(root_path(), :notice => 'User was successfully updated.') }
       else
         format.html { render :action => "edit" }
       end

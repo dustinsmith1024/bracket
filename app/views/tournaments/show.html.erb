@@ -1,17 +1,15 @@
-<p id="notice"><%= notice %></p>
-
 <div class="bracket-title">
 <b>Bracket Name:</b> 
 <% if current_user == @user %>
-<%= link_to @tournament.title, edit_user_tournament_path(@user,@tournament) %>
+<%= link_to @tournament.name, edit_user_tournament_path(@user,@tournament), :class => 'ajax' %>
 <% else %>
-<%= @tournament.title %>
+<%= @tournament.name %>
 <% end %>
 <% if current_user == @user %>
-| <%= link_to 'Rebuild Bracket', tournament_redo_url(@tournament), :method => 'post' if current_user == @user %>
+| <%= link_to 'Rebuild Bracket', tournament_redo_url(@tournament), :method => 'post' if current_user == @user %> (Can only be done up until the tournament starts)
 <% end %>
 <br/><br/>
-<b><%= @tournament.user.email %></b> likes the <%= @tournament.user.team.name + " " + @tournament.user.team.mascot %> and <%= @tournament.tags.collect{|t| t.name.pluralize }.to_sentence %><%# CHANGE TO NAME LATER %>
+<b><%= @tournament.user.name %></b> likes the <%= @tournament.user.team.name + " " + @tournament.user.team.mascot %> and <%= @tournament.tags.collect{|t| t.plural_name }.to_sentence %><%# CHANGE TO NAME LATER %>
 </div>
 <div class="bracket-container">
 <table class="bracket">

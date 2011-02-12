@@ -17,13 +17,13 @@ Yeehaw! I want to be a <%= select(:tag, :person, Tag.find_all_by_kind("Person").
 </form>
 </div>
 <br/>
-<h2>Current Tags:</h2>
-<% @tournament.tags.each do |tag| %>
-  <%= tag.name %> - <%= link_to 'Remove', remove_tournament_tag_path(@tournament,tag), :method => :post, :remote => "true" %><br/>
-<% end %>
 
-<h2>Available Tags:</h2>
-<% @tags.each do |tag| %>
-  <%= link_to tag.name, add_tournament_tag_path(@tournament,tag), :method => :post, :remote => "true" %><br/>
-<% end %>
+
+<%# @tournament.tags.each do |tag| %>
+  <%#= tag.name %> <%#= link_to 'Remove', remove_tournament_tag_path(@tournament,tag), :method => :post, :remote => "true" %><br/>
+<%# end %>
+
+<%# @tags.each do |tag| %>
+  <%#= link_to tag.name, add_tournament_tag_path(@tournament,tag), :method => :post, :remote => "true" %><br/>
+<%# end %>
 

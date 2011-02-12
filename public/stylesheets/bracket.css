@@ -121,6 +121,10 @@ table.bracket td {
   line-height: 13px;
   font-size: 12px;
 }
+table.bracket {
+  margin: auto;
+  width: 100%;
+}
 div.division {
   font-weight: bold;
   color: blue;

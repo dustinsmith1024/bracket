@@ -127,14 +127,18 @@ class TournamentsController < ApplicationController
   # POST /tournaments
   # POST /tournaments.xml
   def create
-    @user = User.find(params[:user_id])
+    @user = current_user
     @tournament = @user.tournaments.new(params[:tournament])
 
     respond_to do |format|
       if @tournament.save
-        format.html { redirect_to(user_url(@user), :notice => 'Tournament was successfully created.') }
+        flash[:notice] = "Tournament created!"
+        format.html { redirect_to(user_url(@user)) }
+        format.js
       else
+        flash[:notice] = "Tournament not created!"
         format.html { render :action => "new" }
+        format.js
       end
     end
   end
@@ -147,9 +151,13 @@ class TournamentsController < ApplicationController
 
     respond_to do |format|
       if @tournament.update_attributes(params[:tournament])
-        format.html { redirect_to(user_path(@user), :notice => 'Tournament was successfully updated.') }
+        flash[:notice] = "Tournament updated!"
+        format.html { redirect_to(user_path(@user)) }
+        format.js
       else
+        flash[:notice] = "Tournament not updated!"
         format.html { render :action => "edit" }
+        format.js
       end
     end
   end
