@@ -21,7 +21,7 @@
 
 <ul>
   <li><%= link_to "Home", pages_home_path, :class => "ajax" %></li>
-  <li><%= link_to "Public Brackets", "", :class => "ajax" %></li>
+  <li><%#= link_to "Public Brackets", "", :class => "ajax" %></li>
   <% if user_signed_in? %>
     <li><%= link_to "My Info", edit_user_path(current_user), :class => "ajax" %></li>
     <li><%= link_to "My Brackets", user_tournaments_path(current_user), :class => "ajax" %></li>
