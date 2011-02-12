@@ -1,8 +1,8 @@
-My bracket challenge takes a different spin on a tournament bracket.
+My NCAA March Madness App that fills out your bracket based on interests you have.
 
-The bracket will be filled out according to seeds, then winner randomly chosen.
+Currently hosted at: http://bracket.heroku.com/.  Very early still, just posting for testing...feedback welcomed.
 
-Working my way through one side of the bracket first...
+Sign Up -> Fill out Name and Favorite Team -> Fill out questions -> Buid Bracket -> View Bracket
 
+Decided to do as learning/fun for myself.  Not sure if it will go to real production yet...
 
-Code apply to personal tourney, NCAA, NFL, etc...
